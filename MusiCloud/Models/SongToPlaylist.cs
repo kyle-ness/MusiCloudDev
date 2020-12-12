@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyTestSite3.Models
+namespace MusiCloud.Models
 {
     public class SongToPlaylist
     {

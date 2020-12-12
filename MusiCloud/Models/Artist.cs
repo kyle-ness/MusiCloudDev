@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyTestSite3.Models
+namespace MusiCloud.Models
 {
     public class Artist
     {

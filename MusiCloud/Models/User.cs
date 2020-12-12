@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace MyTestSite3.Models
+namespace MusiCloud.Models
 {
     public class User
     {
@@ -23,7 +23,5 @@ namespace MyTestSite3.Models
         // Compare between both passwords
         [DataType(DataType.Password), Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
-
-        public AccountType UserType { get; set; }
     }
 }
