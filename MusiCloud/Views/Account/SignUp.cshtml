@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "~/Views/Shared/_LoginAndRegisterLayout.cshtml";
+}
+@model MyTestSite3.Models.Account
+
+<form class="login100-form validate-form" asp-action="SignUp">
+    <span class="login100-form-logo">
+        <i class="zmdi zmdi-playlist-audio"></i>
+    </span>
+
+    <span class="login100-form-title p-b-34 p-t-27">
+        Sign Up
+    </span>
+
+    <div class="wrap-input100 validate-input" data-validate="Display Name">
+        <input class="input100" type="text" name="DisplayName" placeholder="Display Name">
+        <span class="focus-input100" data-placeholder="	&#xf207;"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input" data-validate="Enter username">
+        <input class="input100" type="email" name="Email" placeholder="Email">
+        <span class="focus-input100" data-placeholder="&#xf200;"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input" data-validate="Enter password">
+        <input class="input100" type="password" name="Password" placeholder="Password">
+        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input" data-validate="Confirm password">
+        <input class="input100" type="password" name="ConfirmPassword" placeholder="Confirm Password">
+        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+    </div>
+
+    @if (ViewBag.error != null)
+    {
+        <span class="badge badge-danger">@ViewBag.error</span>
+    }
+
+    <div class="container-login100-form-btn">
+        <button class="site-btn">
+            Sign Up
+        </button>
+    </div>
+</form>
