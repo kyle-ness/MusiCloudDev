@@ -7,147 +7,85 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace MusiCloud.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly MusiCloudContext _context;
+
+        private MusiCloudContext _context;
 
         public UsersController(MusiCloudContext context)
         {
             _context = context;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.User.ToListAsync());
-        }
 
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
-        // GET: Users/Create
-        public IActionResult Create()
+        // GET to Login page
+        public IActionResult Login()
         {
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST to attempt and sign in 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Email,DisplayName,Password,ConfirmPassword")] User user)
+        public IActionResult Login(string Email, string Password)
         {
+            var user = _context.User.FirstOrDefault(u => u.Email == Email && u.Password == Password);
+
+            if (user != null)
+            {
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        // GET the signup page
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        // SignUP
+        [HttpPost]
+        public IActionResult SignUp(string DisplayName, string Email, string Password)
+        {
+
+            // Check that we got all the parameters that we need
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
-        }
 
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
-        }
-
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,DisplayName,Password,ConfirmPassword")] User user)
-        {
-            if (id != user.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                // Check that the email does not exist
+                var check = _context.User.FirstOrDefault(u => u.Email == Email);
+                if (check == null)
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+
+                    var NewUser = new User();
+                    NewUser.Email = Email;
+                    NewUser.Password = Password;
+                    NewUser.DisplayName = DisplayName;
+
+                    _context.User.Add(NewUser);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+
                 }
-                catch (DbUpdateConcurrencyException)
+                else
+
                 {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ViewBag.error = "Email already exists";
+                    return View();
                 }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
-        }
 
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.User.Any(e => e.Id == id);
+            return View();
         }
     }
 }
