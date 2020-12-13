@@ -87,5 +87,10 @@ namespace MusiCloud.Controllers
 
             return View();
         }
+
+        public IActionResult Landing(string DisplayName, string Email, string Password)
+        {
+            return View();
+        }
     }
 }
