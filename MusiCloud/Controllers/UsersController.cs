@@ -10,7 +10,7 @@ using MusiCloud.Models;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MusiCloud.Controllers
 {
@@ -26,6 +26,7 @@ namespace MusiCloud.Controllers
 
 
         // GET to Login page
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -34,6 +35,7 @@ namespace MusiCloud.Controllers
         // POST to attempt and sign in 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public IActionResult Login(string Email, string Password)
         {
             var user = _context.User.FirstOrDefault(u => u.Email == Email && u.Password == Password);
@@ -57,6 +59,7 @@ namespace MusiCloud.Controllers
         // SignUP
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public IActionResult SignUp(string DisplayName, string Email, string Password)
         {
 
