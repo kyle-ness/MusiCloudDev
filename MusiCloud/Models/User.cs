@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 
 namespace MusiCloud.Models
@@ -11,17 +12,28 @@ namespace MusiCloud.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress]
+        [DisplayName("Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password must be at least 4 characters")]
+        [MinLength(4, ErrorMessage = "Password must be at least 4 characters")]
+        [DisplayName("DisplayName")]
         public string DisplayName { get; set; }
 
+        [DisplayName("Password")]
         [Required]
+        [MinLength(8, ErrorMessage = "Minimum 8 characters")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         // Compare between both passwords
-        [DataType(DataType.Password), Compare(nameof(Password))]
+        [DisplayName("ConfirmPassword")]
+        [Required]
+        [MinLength(8, ErrorMessage = "Minimum 8 characters")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Passwords must match!")]
         public string ConfirmPassword { get; set; }
     }
 }

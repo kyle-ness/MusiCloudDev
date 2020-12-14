@@ -60,7 +60,7 @@ namespace MusiCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public IActionResult SignUp(string DisplayName, string Email, string Password)
+        public IActionResult SignUp([Bind("Id,DisplayName,Email,Password,ConfirmPassword")] User UserToCreate)
         {
 
             // Check that we got all the parameters that we need
@@ -68,14 +68,14 @@ namespace MusiCloud.Controllers
             {
 
                 // Check that the email does not exist
-                var check = _context.User.FirstOrDefault(u => u.Email == Email);
+                var check = _context.User.FirstOrDefault(u => u.Email == UserToCreate.Email);
                 if (check == null)
                 {
 
                     var NewUser = new User();
-                    NewUser.Email = Email;
-                    NewUser.Password = Password;
-                    NewUser.DisplayName = DisplayName;
+                    NewUser.Email = UserToCreate.Email;
+                    NewUser.Password = UserToCreate.Password;
+                    NewUser.DisplayName = UserToCreate.DisplayName;
 
                     _context.User.Add(NewUser);
                     _context.SaveChanges();
@@ -86,8 +86,7 @@ namespace MusiCloud.Controllers
                 else
 
                 {
-                    ViewBag.error = "Email already exists";
-                    return View();
+                    ModelState.AddModelError(string.Empty, "User already exists!");
                 }
 
             }

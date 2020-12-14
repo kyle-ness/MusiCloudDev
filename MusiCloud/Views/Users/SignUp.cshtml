@@ -1,8 +1,9 @@
-﻿@{
+﻿@model MusiCloud.Models.User
+
+@{
     ViewData["Title"] = "Sign Up";
     Layout = "~/Views/Shared/_LoginAndRegisterLayout.cshtml";
 }
-@model MusiCloud.Models.User
 
 <form class="login100-form validate-form" asp-action="SignUp">
     <span class="login100-form-logo">
@@ -14,29 +15,28 @@
     </span>
 
     <div class="wrap-input100 validate-input" data-validate="Display Name">
-        <input class="input100" type="text" name="DisplayName" placeholder="Display Name">
+        <input asp-for="DisplayName" class="input100" type="text" name="DisplayName" placeholder="Display Name">
         <span class="focus-input100" data-placeholder="	&#xf207;"></span>
+        <span asp-validation-for="DisplayName" class="alert-danger"></span>
     </div>
 
     <div class="wrap-input100 validate-input" data-validate="Enter username">
-        <input class="input100" type="email" name="Email" placeholder="Email">
+        <input asp-for="Email" class="input100" type="email" name="Email" placeholder="Email">
         <span class="focus-input100" data-placeholder="&#xf200;"></span>
+        <span asp-validation-for="Email" class="alert-danger"></span>
     </div>
 
     <div class="wrap-input100 validate-input" data-validate="Enter password">
-        <input class="input100" type="password" name="Password" placeholder="Password">
+        <input asp-for="Password" class="input100" type="password" name="Password" placeholder="Password">
         <span class="focus-input100" data-placeholder="&#xf191;"></span>
+        <span asp-validation-for="Password" class="alert-danger"></span>
     </div>
 
     <div class="wrap-input100 validate-input" data-validate="Confirm password">
-        <input class="input100" type="password" name="ConfirmPassword" placeholder="Confirm Password">
+        <input asp-for="ConfirmPassword" class="input100" type="password" name="ConfirmPassword" placeholder="Confirm Password">
         <span class="focus-input100" data-placeholder="&#xf191;"></span>
+        <span asp-validation-for="ConfirmPassword" class="alert-danger"></span>
     </div>
-
-    @if (ViewBag.error != null)
-    {
-        <span class="badge badge-danger">@ViewBag.error</span>
-    }
 
     <div class="container-login100-form-btn">
         <button class="site-btn">
