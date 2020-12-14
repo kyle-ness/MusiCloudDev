@@ -10,7 +10,7 @@ using MusiCloud.Models;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MusiCloud.Controllers
 {
@@ -26,6 +26,7 @@ namespace MusiCloud.Controllers
 
 
         // GET to Login page
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -33,6 +34,8 @@ namespace MusiCloud.Controllers
 
         // POST to attempt and sign in 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public IActionResult Login(string Email, string Password)
         {
             var user = _context.User.FirstOrDefault(u => u.Email == Email && u.Password == Password);
@@ -42,6 +45,10 @@ namespace MusiCloud.Controllers
 
                 TempData["DisplayName"] = user.DisplayName;
                 return RedirectToAction("Index", "Users");
+            }
+            else
+            {
+                ViewBag.error = "Wrong username or password";
             }
 
             return View();
@@ -55,7 +62,9 @@ namespace MusiCloud.Controllers
 
         // SignUP
         [HttpPost]
-        public IActionResult SignUp(string DisplayName, string Email, string Password)
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<IActionResult> SignUp([Bind("Id,DisplayName,Email,Password,ConfirmPassword")] User UserToCreate)
         {
 
             // Check that we got all the parameters that we need
@@ -63,17 +72,17 @@ namespace MusiCloud.Controllers
             {
 
                 // Check that the email does not exist
-                var check = _context.User.FirstOrDefault(u => u.Email == Email);
+                var check = _context.User.FirstOrDefault(u => u.Email == UserToCreate.Email);
                 if (check == null)
                 {
 
                     var NewUser = new User();
-                    NewUser.Email = Email;
-                    NewUser.Password = Password;
-                    NewUser.DisplayName = DisplayName;
+                    NewUser.Email = UserToCreate.Email;
+                    NewUser.Password = UserToCreate.Password;
+                    NewUser.DisplayName = UserToCreate.DisplayName;
 
                     _context.User.Add(NewUser);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     TempData["DisplayName"] = NewUser.DisplayName;
                     return RedirectToAction("Index", "Users");
 
@@ -81,8 +90,7 @@ namespace MusiCloud.Controllers
                 else
 
                 {
-                    ViewBag.error = "Email already exists";
-                    return View();
+                    ModelState.AddModelError(string.Empty, "User already exists!");
                 }
 
             }
