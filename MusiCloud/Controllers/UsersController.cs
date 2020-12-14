@@ -40,6 +40,7 @@ namespace MusiCloud.Controllers
             if (user != null)
             {
 
+                TempData["DisplayName"] = user.DisplayName;
                 return RedirectToAction("Index", "Users");
             }
 
@@ -73,6 +74,7 @@ namespace MusiCloud.Controllers
 
                     _context.User.Add(NewUser);
                     _context.SaveChanges();
+                    TempData["DisplayName"] = NewUser.DisplayName;
                     return RedirectToAction("Index", "Users");
 
                 }
@@ -88,7 +90,7 @@ namespace MusiCloud.Controllers
             return View();
         }
 
-        public IActionResult Index(string DisplayName, string Email, string Password)
+        public IActionResult Index()
         {
             return View();
         }
