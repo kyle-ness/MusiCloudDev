@@ -33,6 +33,7 @@ namespace MusiCloud.Controllers
 
         // POST to attempt and sign in 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(string Email, string Password)
         {
             var user = _context.User.FirstOrDefault(u => u.Email == Email && u.Password == Password);
@@ -55,6 +56,7 @@ namespace MusiCloud.Controllers
 
         // SignUP
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult SignUp(string DisplayName, string Email, string Password)
         {
 
