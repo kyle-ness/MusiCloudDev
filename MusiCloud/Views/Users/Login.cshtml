@@ -13,6 +13,12 @@
         Log in
     </span>
 
+    @if (ViewBag.error != null)
+    {
+        <div class="container-login100-form-btn">
+            <span class="badge badge-danger">@ViewBag.error</span>
+        </div>
+    }
     <div class="wrap-input100 validate-input" data-validate="Enter username">
         <input class="input100" type="text" name="Email" placeholder="Username">
         <span class="focus-input100" data-placeholder="&#xf207;"></span>

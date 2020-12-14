@@ -46,6 +46,10 @@ namespace MusiCloud.Controllers
                 TempData["DisplayName"] = user.DisplayName;
                 return RedirectToAction("Index", "Users");
             }
+            else
+            {
+                ViewBag.error = "Wrong username or password";
+            }
 
             return View();
         }
@@ -60,7 +64,7 @@ namespace MusiCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public IActionResult SignUp([Bind("Id,DisplayName,Email,Password,ConfirmPassword")] User UserToCreate)
+        public async Task<IActionResult> SignUp([Bind("Id,DisplayName,Email,Password,ConfirmPassword")] User UserToCreate)
         {
 
             // Check that we got all the parameters that we need
@@ -78,7 +82,7 @@ namespace MusiCloud.Controllers
                     NewUser.DisplayName = UserToCreate.DisplayName;
 
                     _context.User.Add(NewUser);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     TempData["DisplayName"] = NewUser.DisplayName;
                     return RedirectToAction("Index", "Users");
 
