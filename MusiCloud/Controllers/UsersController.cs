@@ -40,7 +40,7 @@ namespace MusiCloud.Controllers
             if (user != null)
             {
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Users");
             }
 
             return View();
@@ -73,7 +73,7 @@ namespace MusiCloud.Controllers
 
                     _context.User.Add(NewUser);
                     _context.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Users");
 
                 }
                 else
@@ -88,7 +88,7 @@ namespace MusiCloud.Controllers
             return View();
         }
 
-        public IActionResult Landing(string DisplayName, string Email, string Password)
+        public IActionResult Index(string DisplayName, string Email, string Password)
         {
             return View();
         }
