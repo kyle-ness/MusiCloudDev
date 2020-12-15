@@ -48,7 +48,10 @@ namespace MusiCloud
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
+            // Session, authentication, and authorization stack 
+            app.UseSession();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
