@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MusiCloud.Data;
+﻿using MusiCloud.Data;
 using MusiCloud.Models;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MusiCloud.Controllers
 {
@@ -36,13 +36,15 @@ namespace MusiCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public IActionResult Login(string Email, string Password)
+        public IActionResult Login(User UserToLogin)
         {
-            var user = _context.User.FirstOrDefault(u => u.Email == Email && u.Password == Password);
+            var user = _context.User.FirstOrDefault(u => u.Email == UserToLogin.Email && u.Password == UserToLogin.Password);
 
             if (user != null)
             {
 
+                HttpContext.Session.SetString("DisplayName", user.DisplayName.ToString());
+                CreateCookie(user);
                 TempData["DisplayName"] = user.DisplayName;
                 return RedirectToAction("Index", "Users");
             }
@@ -84,11 +86,12 @@ namespace MusiCloud.Controllers
                     _context.User.Add(NewUser);
                     await _context.SaveChangesAsync();
                     TempData["DisplayName"] = NewUser.DisplayName;
+                    
+                    CreateCookie(NewUser);
                     return RedirectToAction("Index", "Users");
 
                 }
                 else
-
                 {
                     ModelState.AddModelError(string.Empty, "User already exists!");
                 }
@@ -98,6 +101,39 @@ namespace MusiCloud.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        private async void CreateCookie(User user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim("Id", user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.DisplayName),
+                new Claim(ClaimTypes.PrimarySid, user.Id.ToString())
+            };
+
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10)
+            };
+
+            await HttpContext.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(claimsIdentity),
+                            authProperties);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login");
+        }
+
+
+        [Authorize]
         public IActionResult Index()
         {
             return View();

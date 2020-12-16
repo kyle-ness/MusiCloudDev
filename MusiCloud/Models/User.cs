@@ -30,7 +30,6 @@ namespace MusiCloud.Models
 
         // Compare between both passwords
         [DisplayName("ConfirmPassword")]
-        [Required]
         [MinLength(8, ErrorMessage = "Minimum 8 characters")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords must match!")]
