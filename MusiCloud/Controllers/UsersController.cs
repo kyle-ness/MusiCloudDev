@@ -24,7 +24,6 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
-
         // GET to Login page
         [AllowAnonymous]
         public IActionResult Login()

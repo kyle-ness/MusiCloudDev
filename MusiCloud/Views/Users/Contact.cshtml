@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>MusiCloud | HTML Template</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="SolMusic HTML Template">
+    <meta name="keywords" content="music, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+    <!-- Favicon -->
+    <link href="~/img/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/slicknav.min.css" />
+
+    <!-- Main Stylesheets -->
+    <link rel="stylesheet" href="~/css/style.css" />
+
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <!-- Header section -->
+    <header class="header-section clearfix">
+    </header>
+    <!-- Header section end -->
+    <!-- Contact section -->
+    <section class="contact-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 p-0">
+                    <!-- Map -->
+                    <div id="map"></div>
+                    <script>
+                        function initMap() {
+                            var uluru = { lat: 32.054595949330555, lng: 34.76316337762363 };
+                            var barbi = { lat: 32.051244918484244, lng: 34.76966322402159 };
+                            var zapa  = { lat: 32.11208652994193,  lng: 34.839755739366844};
+                            var manora = { lat: 32.06126973105219, lng: 34.79127538169359 };
+                            var zapaLive = { lat: 31.976553503869024, lng: 34.74178926819835 }; 
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                                zoom: 10,
+                                center: uluru
+                               
+                            });
+                            var marker = new google.maps.Marker({
+                                position: uluru,
+                                map: map
+                            });
+                            var marker = new google.maps.Marker({
+                                position: barbi,
+                                map: map
+                            });
+                            var marker = new google.maps.Marker({
+                                position: zapa,
+                                map: map
+                            });
+                            var marker = new google.maps.Marker({
+                                position: manora,
+                                map: map
+                            });
+                            var marker = new google.maps.Marker({
+                                position: zapaLive,
+                                map: map
+                            });
+                        }
+                    </script>
+                    <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2bXKNDezDf6YNVc-SauobynNHPo4RJb8&callback=initMap">
+                    </script>
+                </div>
+                <div class="col-lg-6 p-0">
+                    <div class="contact-warp">
+                        <div class="section-title mb-0">
+                            <h2>Concert</h2>
+                        </div>
+                        <p>musicloud helps you to find the location of the best concerts. go and find the closer concert to your home. </p>
+                    </div>
+                  
+                    <form class="contact-from">
+                      
+                            <div class="col-md-6">
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer section -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-7 order-lg-2">
+                    <img src="~/img/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+    <!--====== Javascripts & Jquery ======-->
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.slicknav.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/main.js"></script>
+
+</body>
+</html>

@@ -31,6 +31,11 @@ namespace MusiCloud.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public IActionResult Contact()
+        {
+            return View();
+        }
 
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

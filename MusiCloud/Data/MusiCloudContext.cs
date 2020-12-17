@@ -15,5 +15,9 @@ namespace MusiCloud.Data
         }
 
         public DbSet<MusiCloud.Models.User> User { get; set; }
+
+        public DbSet<MusiCloud.Models.Artist> Artist { get; set; }
+
+        public DbSet<MusiCloud.Models.Concert> Concert { get; set; }
     }
 }
