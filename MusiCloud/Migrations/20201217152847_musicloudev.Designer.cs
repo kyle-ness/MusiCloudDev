@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusiCloud.Data;
 
 namespace MusiCloud.Migrations
 {
     [DbContext(typeof(MusiCloudContext))]
-    partial class MusiCloudContextModelSnapshot : ModelSnapshot
+    [Migration("20201217152847_musicloudev")]
+    partial class musicloudev
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
