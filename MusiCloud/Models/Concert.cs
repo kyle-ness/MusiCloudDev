@@ -17,5 +17,9 @@ namespace MusiCloud.Models
         public virtual Artist Artist { get; set; }
 
         public string StreetLocation { get; set; }
+
+        public string CityLocation { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

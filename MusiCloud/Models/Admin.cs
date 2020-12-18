@@ -19,5 +19,13 @@ namespace MusiCloud.Models
 
         [Required]
         public string Password { get; set; }
+
+        // Compare between both passwords
+        [DisplayName("ConfirmPassword")]
+        [Required]
+        [MinLength(8, ErrorMessage = "Minimum 8 characters")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Passwords must match!")]
+        public string ConfirmPassword { get; set; }
     }
 }
