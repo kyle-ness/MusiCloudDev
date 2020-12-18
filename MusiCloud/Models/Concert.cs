@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,5 +18,13 @@ namespace MusiCloud.Models
         public virtual Artist Artist { get; set; }
 
         public string StreetLocation { get; set; }
+
+        public double Lat { get; set; }
+
+        public double Long { get; set; }
+
+        public string AddressName { get; set; }
+
+        public string Description { get; set; }
     }
 }
