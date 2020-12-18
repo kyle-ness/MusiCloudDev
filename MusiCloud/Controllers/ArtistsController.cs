@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MusiCloud.Controllers
 {
@@ -18,7 +19,6 @@ namespace MusiCloud.Controllers
         {
             _context = context;
         }
-
         // GET: Artists
         public async Task<IActionResult> Index()
         {

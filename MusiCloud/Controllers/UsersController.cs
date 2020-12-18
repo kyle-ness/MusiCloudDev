@@ -96,7 +96,10 @@ namespace MusiCloud.Controllers
 
             return View();
         }
-
+        public IActionResult Search()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();

@@ -18,7 +18,6 @@ namespace MusiCloud.Controllers
         {
             _context = context;
         }
-
         // GET: Concerts
         public async Task<IActionResult> Index()
         {
