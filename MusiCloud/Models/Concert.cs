@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,8 +19,12 @@ namespace MusiCloud.Models
 
         public string StreetLocation { get; set; }
 
-        public string CityLocation { get; set; }
+        public double Lat { get; set; }
 
-        public DateTime Date { get; set; }
+        public double Long { get; set; }
+
+        public string AddressName { get; set; }
+
+        public string Description { get; set; }
     }
 }
