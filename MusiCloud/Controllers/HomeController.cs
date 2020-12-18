@@ -35,6 +35,12 @@ namespace MusiCloud.Controllers
         }
 
         [AllowAnonymous]
+        public IActionResult Search()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
         public IActionResult Contact()
         {
             return View();
