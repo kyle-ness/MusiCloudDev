@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MusiCloud.Models;
 using Microsoft.AspNetCore.Authorization;
-
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace MusiCloud.Controllers
 {
@@ -28,6 +30,11 @@ namespace MusiCloud.Controllers
 
         [AllowAnonymous]
         public IActionResult About()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult Search()
         {
             return View();
         }
