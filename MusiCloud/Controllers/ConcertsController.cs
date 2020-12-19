@@ -18,7 +18,32 @@ namespace MusiCloud.Controllers
         {
             _context = context;
         }
+        
+        public async Task<IActionResult> GetConcerts()
+        {
+            // Get the user from his current claim and verify it against the database 
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+            if (userId != null)
+            {
+                var query = from playlist in _context.Playlist
+                            where playlist.UserId.ToString().Equals(userId)
+                            select new
+                            {
+                                name = playlist.Name,
+                            };
 
+
+                var playlists = await query.ToListAsync();
+                return Json(new { Playlists = playlists });
+            }
+            return new JsonResult(new object());
+
+        }
+
+        public IActionResult Show2()
+        {
+            return View();
+        }
         public IActionResult Show()
         {
             return View();
