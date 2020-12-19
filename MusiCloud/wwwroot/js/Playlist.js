@@ -9,14 +9,14 @@ function LoadPlaylists(res) {
 
     else {
         content = '';
-        res.recipe.forEach(x => {
+        res.playlists.forEach(x => {
             content +=
                 '<div class="mix col-lg-3 col-md-4 col-sm-6 movies">' +
-                    '<div class="playlist-item" >' +
-                        '<img src="~/img/playlist/3.jpg" alt="">' +
-                        '<h5>' + x.Name + '</h5>' +
-                    '</div>' +
-                '</div >'
+                '<div class="playlist-item" >' +
+                '<img src="~/img/playlist/3.jpg" alt="">' +
+                '<h5>' + x.name + '</h5>' +
+                '</div>' +
+                '</div >';
         });
 
         $('.playlist-area').html(content);

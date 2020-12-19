@@ -32,10 +32,12 @@ namespace MusiCloud.Controllers
                             where playlist.UserId.ToString().Equals(userId)
                             select new
                             {
-                                Name = playlist.Name,
+                                name = playlist.Name,
                             };
 
-                return Json(await query.ToListAsync());
+
+                var playlists = await query.ToListAsync();
+                return Json(new { Playlists = playlists});
             }
             return new JsonResult(new object());
 
