@@ -18,6 +18,11 @@ namespace MusiCloud.Data
 
         public DbSet<MusiCloud.Models.Playlist> Playlist { get; set; }
 
+        public DbSet<MusiCloud.Models.Artist> Artist { get; set; }
+
+        public DbSet<MusiCloud.Models.Concert> Concert { get; set; }
+
+        public DbSet<MusiCloud.Models.Song> Song { get; set; }
 
     }
 }
