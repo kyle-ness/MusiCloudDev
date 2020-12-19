@@ -105,15 +105,15 @@ namespace MusiCloud.Controllers
             return View();
         }
 
-        private List<Song> _songList;
-        public IEnumerable<Song> Search(string searchTerm)
-        {
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                return _songList;
-            }
+       // private List<Song> _songList;
+        // public IEnumerable<Song> Search(string searchTerm)
+  //      {
+           // if (string.IsNullOrEmpty(searchTerm))
+           // {
+             //   return _songList;
+            // }
 
-            return _songList.Where(s => s.Name.Contains(searchTerm));
-        }
+//            return _songList.Where(s => s.Name.Contains(searchTerm));
+    //    }
     }
 }

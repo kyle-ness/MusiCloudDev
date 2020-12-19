@@ -50,22 +50,22 @@
                 <a href="#" class="register">Logout</a>
             </div>
         </div>
-        <!-- here is an experiment to implement search-->
-        <form method="get">
-            <div class="input-group">
-                <input class="form-control" asp-for="SearchTerm">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        Search
-                    </button>
-                </div>
+        <!--
+    <form method="get">
+        <div class="input-group">
+            <input class="form-control" asp-for="SearchTerm">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    Search
+                </button>
             </div>
-        </form>
+        </div>
+    </form>  here is an experiment to implement search-->
 
         <form class="search-form search-header">
             <input type="text" placeholder="Explore the music world">
             <button asp-action="Search" class="register">Search</button>
-        </form> 
+        </form>
 
     </header>
 
