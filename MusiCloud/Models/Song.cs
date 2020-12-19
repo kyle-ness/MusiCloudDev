@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MusiCloud.Models
 {
@@ -19,7 +20,20 @@ namespace MusiCloud.Models
 
         // FK from album table
         [ForeignKey("Album")]
-        public string AlbumId { get; set; }
+        public int AlbumId { get; set; }
+       
         public virtual Album Album { get; set; }
+
+        private readonly ISongsRepository songRepository;
+        public IEnumerable<Song> Songs { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+
+        public void OnGet()
+        {
+            Songs = songRepository.Search(SearchTerm);
+        }
+
     }
 }

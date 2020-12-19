@@ -21,7 +21,7 @@ namespace MusiCloud.Models
 
         // FK from artist table
         [ForeignKey("Artist")]
-        public string ArtistId { get; set; }
+        public int ArtistId { get; set; }
         public virtual Artist Artist{ get; set; }
     }
 }

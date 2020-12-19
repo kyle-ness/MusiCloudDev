@@ -3,50 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusiCloud.Data;
 
 namespace MusiCloud.Migrations
 {
     [DbContext(typeof(MusiCloudContext))]
-    partial class MusiCloudContextModelSnapshot : ModelSnapshot
+    [Migration("20201219163444_changes")]
+    partial class changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("MusiCloud.Models.Album", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Genre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Release_Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArtistId");
-
-                    b.ToTable("Album");
-                });
 
             modelBuilder.Entity("MusiCloud.Models.Artist", b =>
                 {
@@ -107,40 +80,6 @@ namespace MusiCloud.Migrations
                     b.ToTable("Concert");
                 });
 
-            modelBuilder.Entity("MusiCloud.Models.Song", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AlbumId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CounterPlayed")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LinkToPlay")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SearchTerm")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SongId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlbumId");
-
-                    b.HasIndex("SongId");
-
-                    b.ToTable("Song");
-                });
-
             modelBuilder.Entity("MusiCloud.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -169,15 +108,6 @@ namespace MusiCloud.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("MusiCloud.Models.Album", b =>
-                {
-                    b.HasOne("MusiCloud.Models.Artist", "Artist")
-                        .WithMany()
-                        .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MusiCloud.Models.Concert", b =>
                 {
                     b.HasOne("MusiCloud.Models.Artist", "Artist")
@@ -185,19 +115,6 @@ namespace MusiCloud.Migrations
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MusiCloud.Models.Song", b =>
-                {
-                    b.HasOne("MusiCloud.Models.Album", "Album")
-                        .WithMany()
-                        .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MusiCloud.Models.Song", null)
-                        .WithMany("Songs")
-                        .HasForeignKey("SongId");
                 });
 #pragma warning restore 612, 618
         }
