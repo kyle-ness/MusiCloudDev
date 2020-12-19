@@ -137,19 +137,43 @@ namespace MusiCloud.Controllers
             return View();
         }
 
+        
         [Authorize]
         public IActionResult UserSettings()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult UserSettings(string CurrentPassword, string NewPassword, string ConfirmNewPassword)
+        {
 
 
-            //if (ModelState.IsValid)
-            //{
-            //    var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+            {
+                var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 
-            //    _context.User.Update()
+                if (userId != null)
+                {
 
+                    // Check if the password matches in the database
+                    var PasswordCheck = _context.User.FirstOrDefault(u => u.Id.ToString() == userId && u.Password == CurrentPassword);
 
-            //}
+                    if (PasswordCheck != null)
+                    {
+                        ViewBag.error = "Yay!!!";
+                    }
+
+                    else
+                    {
+                        ViewBag.error = "Incorrect Password";
+                    }
+                }
+                else
+                {
+                    ViewBag.error = "No Session";
+                }
+            }
 
             return View();
         }
