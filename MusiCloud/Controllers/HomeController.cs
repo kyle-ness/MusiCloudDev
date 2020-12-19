@@ -32,6 +32,17 @@ namespace MusiCloud.Controllers
             return View();
         }
 
+        public IActionResult Error404()
+        {
+            return View();
+        }
+
+        public IActionResult Unauthorized()
+        {
+            return View();
+        }
+
+
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
