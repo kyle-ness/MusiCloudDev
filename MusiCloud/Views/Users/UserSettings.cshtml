@@ -1,4 +1,5 @@
-﻿
+﻿@model MusiCloud.Models.ResetPasswordForUser
+
 @{
     ViewData["Title"] = "UserSettings";
     Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
@@ -19,15 +20,17 @@
                     <form asp-action="UserSettings" class="contact-from">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" placeholder="Current password" name="CurrentPassword">
+                                <input asp-for="CurrentPassword" type="password" placeholder="Current password" name="CurrentPassword">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" placeholder="New Password" name="NewPassword">
+                                <input asp-for="NewPassword" type="password" placeholder="New Password" name="NewPassword">
+                                <span asp-validation-for="NewPassword" class="alert-danger"></span>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" placeholder="Re-enter password" name="ConfirmNewPassword">
+                                <input asp-for="ConfirmNewPassword" type="password" placeholder="Re-enter password" name="ConfirmNewPassword">
+                                <span asp-validation-for="ConfirmNewPassword" class="alert-danger"></span>
                             </div>
                             <div class="col-md-12">
                                 <button class="site-btn">Update</button>
@@ -39,6 +42,13 @@
                     {
                         <div class="container-login100-form-btn">
                             <span class="badge badge-danger">@ViewBag.error</span>
+                        </div>
+                    }
+
+                    @if (ViewBag.success != null)
+                    {
+                        <div class="container-login100-form-btn">
+                            <span class="badge badge-success">@ViewBag.success</span>
                         </div>
                     }
 

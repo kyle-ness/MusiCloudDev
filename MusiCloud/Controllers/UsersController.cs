@@ -146,22 +146,38 @@ namespace MusiCloud.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult UserSettings(string CurrentPassword, string NewPassword, string ConfirmNewPassword)
+        public async Task<IActionResult> UserSettings(ResetPasswordForUser PasswordReset)
         {
 
 
+            if (!ModelState.IsValid)
             {
+                ViewBag.error = "Invalid parameters";
+                return View();
+            }
+
+            // Get the variables    
+            var CurrentPassword = PasswordReset.CurrentPassword;
+            var NewPassword = PasswordReset.NewPassword;
+            var ConfirmNewPassword = PasswordReset.ConfirmNewPassword;
+
+            {
+                
+                // Get the user from his current claim and verify it against the database 
                 var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 
                 if (userId != null)
                 {
 
                     // Check if the password matches in the database
-                    var PasswordCheck = _context.User.FirstOrDefault(u => u.Id.ToString() == userId && u.Password == CurrentPassword);
+                    var user = _context.User.FirstOrDefault(u => u.Id.ToString() == userId && u.Password == CurrentPassword);
 
-                    if (PasswordCheck != null)
+                    if (user != null)
                     {
-                        ViewBag.error = "Yay!!!";
+                        user.Password = NewPassword;
+                        await _context.SaveChangesAsync();
+                        ViewBag.success = "Password was successfully changed!";
+                           
                     }
 
                     else
