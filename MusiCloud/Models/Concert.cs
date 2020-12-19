@@ -13,9 +13,14 @@ namespace MusiCloud.Models
         public string Name { get; set; }
 
         [ForeignKey("Artist")]
-        public string ArtistId { get; set; }
+        public int ArtistId { get; set; }
         public virtual Artist Artist { get; set; }
-
-        public string StreetLocation { get; set; }
+        public DateTime Date { get; set; }
+        public double Lat { get; set; }
+        public double Long { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string AddressName { get; set; }
+        public string Description { get; set; }
     }
 }
