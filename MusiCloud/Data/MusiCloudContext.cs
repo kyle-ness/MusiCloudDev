@@ -15,5 +15,6 @@ namespace MusiCloud.Data
         }
 
         public DbSet<MusiCloud.Models.User> User { get; set; }
+        public object Concert { get; internal set; }
     }
 }
