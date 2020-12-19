@@ -45,7 +45,7 @@ namespace MusiCloud.Controllers
 
                 HttpContext.Session.SetString("DisplayName", user.DisplayName.ToString());
                 CreateCookie(user);
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("UserHome", "Home");
             }
             else
             {
@@ -86,7 +86,7 @@ namespace MusiCloud.Controllers
                     await _context.SaveChangesAsync();
                     
                     CreateCookie(NewUser);
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("UserHome", "Home");
 
                 }
                 else
@@ -128,13 +128,6 @@ namespace MusiCloud.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
-        }
-
-
-        [Authorize]
-        public IActionResult Index()
-        {
-            return View();
         }
 
         
