@@ -106,7 +106,7 @@ namespace MusiCloud.Controllers
             {
                 new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.DisplayName),
-                new Claim(ClaimTypes.PrimarySid, user.Id.ToString())
+                new Claim(ClaimTypes.PrimarySid, user.Id.ToString()),
             };
 
             var claimsIdentity = new ClaimsIdentity(
@@ -134,6 +134,23 @@ namespace MusiCloud.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult UserSettings()
+        {
+
+
+            //if (ModelState.IsValid)
+            //{
+            //    var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            //    _context.User.Update()
+
+
+            //}
+
             return View();
         }
     }
