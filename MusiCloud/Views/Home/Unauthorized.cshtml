@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+}
+
+<section class="intro-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-title">
+                    <h1>Unauthorized</h1>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <p>
+                    You must have an account to access this page. If you have an existing account, please sign in, otherwise, you are welcome to join us by creating a new account.
+                </p>
+                <a asp-controller="Users" asp-action="Login" class="site-btn site-login">I Already have an account</a>
+                <span class=.hs-item>
+                    <a asp-controller="Users" asp-action="SignUp" class="site-btn">Create new account</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
