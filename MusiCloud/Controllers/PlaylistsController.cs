@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace MusiCloud.Controllers
 {
@@ -18,6 +20,27 @@ namespace MusiCloud.Controllers
         {
             _context = context;
         }
+
+        [Authorize]
+        public async Task<IActionResult> List()
+        {
+            // Get the user from his current claim and verify it against the database 
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+            if (userId != null)
+            {
+                var query = from playlist in _context.Playlist
+                            where playlist.UserId.ToString().Equals(userId)
+                            select new
+                            {
+                                Name = playlist.Name,
+                            };
+
+                return Json(await query.ToListAsync());
+            }
+            return new JsonResult(new object());
+
+        }
+
 
         // GET: Playlists
         public async Task<IActionResult> Index()
