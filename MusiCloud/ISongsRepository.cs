@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace MusiCloud
 {
-    interface ISongsRepository
+    public interface ISongsRepository
     {
+        IEnumerable<Models.Song> Search(string searchTerm);
     }
 }
