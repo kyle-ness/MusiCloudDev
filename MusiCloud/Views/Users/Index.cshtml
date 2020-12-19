@@ -1,14 +1,15 @@
 ﻿
 @{
     ViewData["Title"] = "Welcome";
-    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml"; 
+    
 }
 
 <!-- Playlist section -->
 <section class="playlist-section spad">
     <div class="container-fluid">
         <div class="section-title">
-            <h2>Welcome @TempData["DisplayName"]</h2>
+            <h2> Welcome @User.Identity.Name</h2>
         </div>
         <div class="clearfix"></div>
         <div class="row">

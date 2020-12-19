@@ -45,7 +45,6 @@ namespace MusiCloud.Controllers
 
                 HttpContext.Session.SetString("DisplayName", user.DisplayName.ToString());
                 CreateCookie(user);
-                TempData["DisplayName"] = user.DisplayName;
                 return RedirectToAction("Index", "Users");
             }
             else
@@ -85,7 +84,6 @@ namespace MusiCloud.Controllers
 
                     _context.User.Add(NewUser);
                     await _context.SaveChangesAsync();
-                    TempData["DisplayName"] = NewUser.DisplayName;
                     
                     CreateCookie(NewUser);
                     return RedirectToAction("Index", "Users");
