@@ -24,7 +24,6 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
-
         // GET to Login page
         [AllowAnonymous]
         public IActionResult Login()
@@ -97,10 +96,24 @@ namespace MusiCloud.Controllers
 
             return View();
         }
-
+        public IActionResult Search()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();
         }
+
+        // private List<Song> _songList;
+        // public IEnumerable<Song> Search(string searchTerm)
+        //      {
+        // if (string.IsNullOrEmpty(searchTerm))
+        // {
+        //   return _songList;
+        // }
+
+        //            return _songList.Where(s => s.Name.Contains(searchTerm));
+        //    }
     }
 }
