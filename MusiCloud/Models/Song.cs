@@ -14,12 +14,23 @@ namespace MusiCloud.Models
         public string Name { get; set; }
 
         public int CounterPlayed { get; set; }
-       
+
         public string LinkToPlay { get; set; }
 
         // FK from album table
         [ForeignKey("Album")]
         public int AlbumId { get; set; }
+
         public virtual Album Album { get; set; }
+
+        private readonly ISongsRepository songRepository;
+        public IEnumerable<Song> Songs { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+
+        public void OnGet()
+        {
+            Songs = songRepository.Search(SearchTerm);
+        }
     }
-}
