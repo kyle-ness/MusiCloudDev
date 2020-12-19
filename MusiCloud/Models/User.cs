@@ -35,4 +35,29 @@ namespace MusiCloud.Models
         [Compare("Password", ErrorMessage = "Passwords must match!")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class ResetPasswordForUser
+    {
+
+
+        [DisplayName("CurrentPassword")]
+        [Required]
+        [DataType(DataType.Password)]
+        public string CurrentPassword{ get; set; }
+
+
+        [DisplayName("NewPassword")]
+        [Required]
+        [MinLength(8, ErrorMessage = "Minimum 8 characters")]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+
+        // Compare between both passwords
+        [DisplayName("ConfirmNewPassword")]
+        [MinLength(8, ErrorMessage = "Minimum 8 characters")]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "Passwords must match!")]
+        public string ConfirmNewPassword { get; set; }
+
+    }
 }

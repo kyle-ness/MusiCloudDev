@@ -45,8 +45,7 @@ namespace MusiCloud.Controllers
 
                 HttpContext.Session.SetString("DisplayName", user.DisplayName.ToString());
                 CreateCookie(user);
-                TempData["DisplayName"] = user.DisplayName;
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("UserHome", "Home");
             }
             else
             {
@@ -85,10 +84,9 @@ namespace MusiCloud.Controllers
 
                     _context.User.Add(NewUser);
                     await _context.SaveChangesAsync();
-                    TempData["DisplayName"] = NewUser.DisplayName;
                     
                     CreateCookie(NewUser);
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("UserHome", "Home");
 
                 }
                 else
@@ -108,7 +106,7 @@ namespace MusiCloud.Controllers
             {
                 new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.DisplayName),
-                new Claim(ClaimTypes.PrimarySid, user.Id.ToString())
+                new Claim(ClaimTypes.PrimarySid, user.Id.ToString()),
             };
 
             var claimsIdentity = new ClaimsIdentity(
@@ -132,10 +130,60 @@ namespace MusiCloud.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        
         [Authorize]
-        public IActionResult Index()
+        public IActionResult UserSettings()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UserSettings(ResetPasswordForUser PasswordReset)
+        {
+
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.error = "Invalid parameters";
+                return View();
+            }
+
+            // Get the variables    
+            var CurrentPassword = PasswordReset.CurrentPassword;
+            var NewPassword = PasswordReset.NewPassword;
+            var ConfirmNewPassword = PasswordReset.ConfirmNewPassword;
+
+            {
+                
+                // Get the user from his current claim and verify it against the database 
+                var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+                if (userId != null)
+                {
+
+                    // Check if the password matches in the database
+                    var user = _context.User.FirstOrDefault(u => u.Id.ToString() == userId && u.Password == CurrentPassword);
+
+                    if (user != null)
+                    {
+                        user.Password = NewPassword;
+                        await _context.SaveChangesAsync();
+                        ViewBag.success = "Password was successfully changed!";
+                           
+                    }
+
+                    else
+                    {
+                        ViewBag.error = "Incorrect Password";
+                    }
+                }
+                else
+                {
+                    ViewBag.error = "No Session";
+                }
+            }
+
             return View();
         }
     }

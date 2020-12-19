@@ -1,15 +1,23 @@
 ﻿
 @{
     ViewData["Title"] = "Welcome";
-    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml"; 
+    
 }
 
 <!-- Playlist section -->
 <section class="playlist-section spad">
     <div class="container-fluid">
         <div class="section-title">
-            <h2>Welcome @TempData["DisplayName"]</h2>
+            <h2> Welcome @User.Identity.Name</h2>
         </div>
+        <!-- Create playlist button -->
+        <div class="d-flex flex-row-reverse">
+            <form>
+                <input type="submit" class="site-btn" value="Create Playlist">
+            </form>
+        </div>
+        <!-- End Ceate playlist button -->
         <div class="clearfix"></div>
         <div class="row">
             <div class="col-lg-6">
@@ -18,6 +26,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-6">
                 <form class="search-form search-song-filter">
@@ -30,91 +39,91 @@
         <div class="row playlist-area">
             <div class="mix col-lg-3 col-md-4 col-sm-6 genres">
                 <div class="playlist-item">
-                    <img src="img/playlist/1.jpg" alt="">
+                    <img src="~/img/playlist/1.jpg" alt="">
                     <h5>Discover</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 artists">
                 <div class="playlist-item">
-                    <img src="img/playlist/2.jpg" alt="">
+                    <img src="~/img/playlist/2.jpg" alt="">
                     <h5>Dj Sets</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 movies">
                 <div class="playlist-item">
-                    <img src="img/playlist/3.jpg" alt="">
+                    <img src="~/img/playlist/3.jpg" alt="">
                     <h5>Recorded Live</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 labels">
                 <div class="playlist-item">
-                    <img src="img/playlist/4.jpg" alt="">
+                    <img src="~/img/playlist/4.jpg" alt="">
                     <h5>Oldies</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 genres">
                 <div class="playlist-item">
-                    <img src="img/playlist/5.jpg" alt="">
+                    <img src="~/img/playlist/5.jpg" alt="">
                     <h5>Rock & Roll</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 artists">
                 <div class="playlist-item">
-                    <img src="img/playlist/6.jpg" alt="">
+                    <img src="~/img/playlist/6.jpg" alt="">
                     <h5>Classic Music</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 movies">
                 <div class="playlist-item">
-                    <img src="img/playlist/7.jpg" alt="">
+                    <img src="~/img/playlist/7.jpg" alt="">
                     <h5>Rock</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 labels">
                 <div class="playlist-item">
-                    <img src="img/playlist/8.jpg" alt="">
+                    <img src="~/img/playlist/8.jpg" alt="">
                     <h5>Alternative</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 genres">
                 <div class="playlist-item">
-                    <img src="img/playlist/9.jpg" alt="">
+                    <img src="~/img/playlist/9.jpg" alt="">
                     <h5>Country</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 artists">
                 <div class="playlist-item">
-                    <img src="img/playlist/10.jpg" alt="">
+                    <img src="~/img/playlist/10.jpg" alt="">
                     <h5>EDM</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 movies">
                 <div class="playlist-item">
-                    <img src="img/playlist/11.jpg" alt="">
+                    <img src="~/img/playlist/11.jpg" alt="">
                     <h5>Pop Culture</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 labels">
                 <div class="playlist-item">
-                    <img src="img/playlist/12.jpg" alt="">
+                    <img src="~/img/playlist/12.jpg" alt="">
                     <h5>The 90’s</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 genres">
                 <div class="playlist-item">
-                    <img src="img/playlist/13.jpg" alt="">
+                    <img src="~/img/playlist/13.jpg" alt="">
                     <h5>Jass & Blues</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 artists">
                 <div class="playlist-item">
-                    <img src="img/playlist/14.jpg" alt="">
+                    <img src="~/img/playlist/14.jpg" alt="">
                     <h5>Dj Sets</h5>
                 </div>
             </div>
             <div class="mix col-lg-3 col-md-4 col-sm-6 movies">
                 <div class="playlist-item">
-                    <img src="img/playlist/15.jpg" alt="">
+                    <img src="~/img/playlist/15.jpg" alt="">
                     <h5>Minimal</h5>
                 </div>
             </div>
