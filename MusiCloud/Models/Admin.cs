@@ -27,5 +27,8 @@ namespace MusiCloud.Models
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords must match!")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string UserType { get; set; }
     }
 }
