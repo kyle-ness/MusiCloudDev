@@ -33,14 +33,14 @@
 
         <div class="row">
             <div class="col-lg-6">
-                <form class="search-form search-song-filter">
-                    <input type="text" placeholder="Search for a playlist">
+                <div class="search-form search-song-filter">
+                    <input id="PlaylistFilter" onkeyup="FilterPlaylists()" type="text" placeholder="Search for a playlist">
                     <button class="search-song-button">Filter</button>
-                </form>
+                </div>
             </div>
         </div>
         <div class="clearfix"></div>
-        <div class="row playlist-area">
+        <div id="AllPlaylists" class="row playlist-area">
         </div>
     </div>
 </section>
@@ -50,27 +50,8 @@
     <script src="~/js/Playlist.js"></script>
     
     <script>
-        $("#CreatePlaylist").click(function () {
-            CreatePlaylist();
-        })
 
-        function CreatePlaylist() {
-            var playlist_data = {
-                'Name': $("#PlaylistName").val()
-            };
-            $("#PlaylistName").attr("placeholder", "Create more playlists").val("")
-            $.ajax({
-                url: '/Playlists/CreatePlaylistAjax',
-                data: playlist_data,
-                success: function (res) {
-                    CreatePlaylistResult(res);
-                }
-            });
-        }
 
-        function CreatePlaylistResult(res) {
-            fetchPlaylists();
-        }
 
     </script>
 }
