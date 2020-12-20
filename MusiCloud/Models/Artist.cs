@@ -17,5 +17,7 @@ namespace MusiCloud.Models
         public string Genre { get; set; }
 
         public string ImageLink { get; set; }
+
+        public string AristLink {get; set;}
     }
 }

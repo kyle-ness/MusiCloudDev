@@ -65,7 +65,7 @@ namespace MusiCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> SignUp([Bind("Id,DisplayName,Email,Password,ConfirmPassword")] User UserToCreate)
+        public async Task<IActionResult> SignUp([Bind("Id,DisplayName,Email,Password,ConfirmPassword,UserType")] User UserToCreate)
         {
 
             // Check that we got all the parameters that we need
@@ -81,6 +81,7 @@ namespace MusiCloud.Controllers
                     NewUser.Email = UserToCreate.Email;
                     NewUser.Password = UserToCreate.Password;
                     NewUser.DisplayName = UserToCreate.DisplayName;
+                    NewUser.UserType = "User";
 
                     _context.User.Add(NewUser);
                     await _context.SaveChangesAsync();
@@ -106,6 +107,7 @@ namespace MusiCloud.Controllers
             {
                 new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.DisplayName),
+                new Claim(ClaimTypes.Role, user.UserType),
                 new Claim(ClaimTypes.PrimarySid, user.Id.ToString()),
             };
 

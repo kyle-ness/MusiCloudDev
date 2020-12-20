@@ -37,7 +37,7 @@ namespace MusiCloud.Controllers
             return View();
         }
 
-        public IActionResult Unauthorized()
+        public IActionResult UnauthorizedPage()
         {
             return View();
         }

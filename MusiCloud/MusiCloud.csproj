@@ -12,6 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201220030914_Initial.cs" />
+    <Compile Remove="Migrations\20201220030914_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20201220142323_ModelUpdates.cs" />
+    <Compile Remove="Migrations\20201220142323_ModelUpdates.Designer.cs" />
+    <Compile Remove="Migrations\20201220145455_updates_models.cs" />
+    <Compile Remove="Migrations\20201220145455_updates_models.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
