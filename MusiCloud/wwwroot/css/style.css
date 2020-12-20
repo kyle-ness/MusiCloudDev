@@ -90,6 +90,10 @@ ol {
 Helper CSS
  -----------------------*/
 
+.regular {
+	display: inline-block
+}
+
 .section-title {
 	margin-bottom: 60px;
 }

@@ -14,7 +14,9 @@ function LoadPlaylists(res) {
                 '<div id="wrapper" class="mix col-lg-3 col-md-4 col-sm-6 movies">' +
                 '<div id="playlist-item" class="playlist-item" >' +
                 '<img src="/img/playlist/'+ x.imgUrl +'.jpg" alt="">' +
+                ' <a href="/Playlists/Playlist/' + x.playlistId + '">' +
                 '<h5>' + x.name + '</h5>' +
+                '</a>' +
                 '</div>' +
                 '</div >';
         });
