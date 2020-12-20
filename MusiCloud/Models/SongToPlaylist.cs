@@ -10,16 +10,14 @@ namespace MusiCloud.Models
     public class SongToPlaylist
     {
 
+        public int Id { get; set; }
+
         // FK from playlist table
-        [Key]
-        [Column(Order = 1)]
         [ForeignKey("Playlist")]
         public int PlaylistId { get; set; }
         public virtual Playlist Playlist { get; set; }
 
         // FK from song table
-        [Key]
-        [Column(Order = 2)]
         [ForeignKey("Song")]
         public int SongId { get; set; }
         public virtual Song Song { get; set; }

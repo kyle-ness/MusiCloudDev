@@ -24,5 +24,11 @@ namespace MusiCloud.Data
 
         public DbSet<MusiCloud.Models.Song> Song { get; set; }
 
+        public DbSet<MusiCloud.Models.SongToPlaylist> SongToPlaylist { get; set; }
+
+        public DbSet<MusiCloud.Models.Admin> Admin { get; set; }
+
+        public DbSet<MusiCloud.Models.Album> Album { get; set; }
+
     }
 }
