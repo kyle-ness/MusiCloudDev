@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Web;
 
 
 namespace MusiCloud.Controllers
@@ -15,6 +16,8 @@ namespace MusiCloud.Controllers
     public class PlaylistsController : Controller
     {
         private readonly MusiCloudContext _context;
+
+
 
         public PlaylistsController(MusiCloudContext context)
         {
@@ -28,20 +31,47 @@ namespace MusiCloud.Controllers
             var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
             if (userId != null)
             {
+
                 var query = from playlist in _context.Playlist
                             where playlist.UserId.ToString().Equals(userId)
                             select new
                             {
                                 name = playlist.Name,
+                                imgUrl = playlist.ImageId,
                             };
 
 
                 var playlists = await query.ToListAsync();
-                return Json(new { Playlists = playlists});
+                return Json(new { Playlists = playlists });
             }
             return new JsonResult(new object());
 
         }
+
+        [Authorize]
+        public async Task<IActionResult> CreatePlaylistAjax(String Name)
+        {
+
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (userId != null)
+            {
+
+                Playlist new_playlist = new Playlist();
+                new_playlist.Name = Name;
+
+                new_playlist.UserId = int.Parse(userId);
+                Random rnd = new Random();
+                new_playlist.ImageId = rnd.Next(1, 16);
+
+                _context.Add(new_playlist);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+
+            }
+            return Json(new { success = false });
+        }
+
 
 
         // GET: Playlists

@@ -1,4 +1,6 @@
 ﻿
+@model MusiCloud.Models.Playlist
+
 @{
     ViewData["Title"] = "Welcome";
     Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
@@ -13,10 +15,11 @@
         </div>
         <!-- Create playlist button -->
         <div class="d-flex flex-row-reverse">
-            <form class="search-form create-playlist">
-                <input type="text" placeholder="Search for a playlist">
-                <button>Create Playlist</button>
-            </form>
+            <div class="search-form create-playlist">
+                <input id="PlaylistName" type="text" placeholder="Create playlist">
+                <button id="CreatePlaylist">Create Playlist</button>
+            </div>
+            <span class="alert-danger"></span>
         </div>
         <!-- End Ceate playlist button -->
         <div class="clearfix"></div>
@@ -30,17 +33,17 @@
 
         <div class="row">
             <div class="col-lg-6">
-                <form class="search-form search-song-filter">
-                    <input type="text" placeholder="Search for a playlist">
-                    <button class="search-song-button">Filter</button>
-                </form>
+                <div class="search-form search-song-filter">
+                    <input id="PlaylistFilter" onkeyup="FilterPlaylists()" type="text" placeholder="Search for a playlist">
+                </div>
             </div>
         </div>
         <div class="clearfix"></div>
-        <div class="row playlist-area">
+        <div id="AllPlaylists" class="row playlist-area">
         </div>
     </div>
 </section>
+
 @section Scripts
 { 
     <script src="~/js/Playlist.js"></script>
