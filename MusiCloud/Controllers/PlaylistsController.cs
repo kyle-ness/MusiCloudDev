@@ -36,6 +36,7 @@ namespace MusiCloud.Controllers
                             {
                                 name = playlist.Name,
                                 imgUrl = playlist.ImageId,
+                                playlistId = playlist.Id
                             };
 
 
