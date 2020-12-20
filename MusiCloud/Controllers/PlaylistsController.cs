@@ -71,6 +71,7 @@ namespace MusiCloud.Controllers
             return Json(new { success = false });
         }
 
+        [Authorize]
         public async Task<IActionResult> Playlist(int? id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
@@ -96,8 +97,29 @@ namespace MusiCloud.Controllers
             return View(playlist);
         }
 
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletePlaylist(String playlist_id)
+        {
 
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 
+            if (userId == null)
+            {
+                return RedirectToAction("UnauthorizedPage", "Home");
+            }
+
+            if (playlist_id == null)
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+
+            var playlist = await _context.Playlist.FirstOrDefaultAsync(m => m.Id.ToString() == playlist_id && m.UserId.ToString() == userId);
+            _context.Playlist.Remove(playlist);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("UserHome", "Home");
+        }
 
 
         // GET: Playlists

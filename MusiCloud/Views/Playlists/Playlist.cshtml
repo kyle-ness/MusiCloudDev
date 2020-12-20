@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Welcome";
     Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+    string imageId = Model.ImageId.ToString() + ".jpg";
 
 }
 
@@ -13,13 +14,19 @@
 
         <!-- Playlist name -->
         <div class="section-title">
-            <h2>@Html.DisplayNameFor(model => model.Name)</h2>
+            <h2>
+                @Html.DisplayFor(model => model.Name)
+            </h2>
         </div>
         <!-- End of Playlist name -->
         <!-- Delete playlist button -->
         <div class="d-flex flex-row-reverse">
-            <form>
-                <input type="submit" class="site-btn" value="delete playlist">
+            <form asp-action="DeletePlaylist">
+                
+                <input type="hidden" name="playlist_id" value="@Html.DisplayFor(model => model.Id)"/>
+                <submit>
+                    <input type="submit" class="site-btn" value="delete playlist">
+                </submit>
             </form>
         </div>
         <!-- End Delete playlist button -->
@@ -30,7 +37,7 @@
         <div class="row">
             <div class="mx-auto">
                 <div class="category-item">
-                    <img src="img/playlist/9.jpg" alt="">
+                    <img src="~/img/playlist/@imageId" alt="">
                 </div>
             </div>
         </div>
@@ -48,7 +55,6 @@
                 </div>
             </div>
         </div>
-        <!-- Search song in playlist -->
     </div>
 </section>
 
@@ -106,7 +112,7 @@
 @section Scripts
 {
     <!-- Audio Player and Initialization -->
-    <script src="js/jquery.jplayer.min.js"></script>
-    <script src="js/jplayerInit.js"></script>
+    <script src="~/js/jquery.jplayer.min.js"></script>
+    <script src="~/js/jplayerInit.js"></script>
 
 }
