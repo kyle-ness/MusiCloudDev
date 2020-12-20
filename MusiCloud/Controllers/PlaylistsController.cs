@@ -17,8 +17,6 @@ namespace MusiCloud.Controllers
     {
         private readonly MusiCloudContext _context;
 
-
-
         public PlaylistsController(MusiCloudContext context)
         {
             _context = context;
@@ -71,6 +69,33 @@ namespace MusiCloud.Controllers
             }
             return Json(new { success = false });
         }
+
+        public async Task<IActionResult> Playlist(int? id)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (userId == null)
+            {
+                return RedirectToAction("UnauthorizedPage", "Home");
+            }
+
+            if (id == null)
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+
+            // Get only the playlist that belong to the user, based on the user's Id from the claim
+            var playlist = await _context.Playlist
+                .FirstOrDefaultAsync(m => m.Id == id && m.UserId.ToString() == userId);
+            if (playlist == null)
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+
+            return View(playlist);
+        }
+
+
 
 
 

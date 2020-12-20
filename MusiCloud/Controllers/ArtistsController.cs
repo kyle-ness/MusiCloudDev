@@ -54,7 +54,7 @@ namespace MusiCloud.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,First_Name,Last_Name,Genre")] Artist artist)
+        public async Task<IActionResult> Create([Bind("Id,Name,Genre,ImageLink,ArtistLink")] Artist artist)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace MusiCloud.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,First_Name,Last_Name,Genre")] Artist artist)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Genre,ImageLink,ArtistLink")] Artist artist)
         {
             if (id != artist.Id)
             {
