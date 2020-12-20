@@ -10,8 +10,8 @@ using MusiCloud.Data;
 namespace MusiCloud.Migrations
 {
     [DbContext(typeof(MusiCloudContext))]
-    [Migration("20201219193750_init3")]
-    partial class init3
+    [Migration("20201220031527_InitAfterRemove")]
+    partial class InitAfterRemove
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,7 @@ namespace MusiCloud.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Release_Date")
@@ -57,13 +58,14 @@ namespace MusiCloud.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("First_Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Last_Name")
+                    b.Property<string>("ImageLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -79,6 +81,7 @@ namespace MusiCloud.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddressName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ArtistId")
@@ -103,6 +106,7 @@ namespace MusiCloud.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -119,7 +123,11 @@ namespace MusiCloud.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
@@ -149,6 +157,7 @@ namespace MusiCloud.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -177,6 +186,10 @@ namespace MusiCloud.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

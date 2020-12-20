@@ -2,7 +2,7 @@
 
 namespace MusiCloud.Migrations
 {
-    public partial class testNuget : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

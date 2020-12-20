@@ -11,6 +11,7 @@ namespace MusiCloud.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public DateTime Release_Date { get; set; }
