@@ -1,4 +1,6 @@
 ﻿
+@model MusiCloud.Models.Playlist
+
 @{
     ViewData["Title"] = "Welcome";
     Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
@@ -13,10 +15,11 @@
         </div>
         <!-- Create playlist button -->
         <div class="d-flex flex-row-reverse">
-            <form class="search-form create-playlist">
-                <input type="text" placeholder="Search for a playlist">
+            <form asp-controller="Playlists" asp-action="CreatePlaylistAjax" method="post" class="search-form create-playlist">
+                <input asp-for="Name" type="text" placeholder="Search for a playlist">
                 <button>Create Playlist</button>
             </form>
+            <span asp-validation-for="Name" class="alert-danger"></span>
         </div>
         <!-- End Ceate playlist button -->
         <div class="clearfix"></div>

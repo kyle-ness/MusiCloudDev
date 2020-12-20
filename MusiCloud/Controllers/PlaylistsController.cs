@@ -37,11 +37,34 @@ namespace MusiCloud.Controllers
 
 
                 var playlists = await query.ToListAsync();
-                return Json(new { Playlists = playlists});
+                return Json(new { Playlists = playlists });
             }
             return new JsonResult(new object());
 
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreatePlaylistAjax([Bind("Id,Name,UserId")] Playlist new_playlist)
+        {
+
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (ModelState.IsValid && userId != null)
+            {
+
+                new_playlist.UserId = int.Parse(userId);
+                Random rnd = new Random();
+                new_playlist.ImageId = rnd.Next(1, 16);
+
+                _context.Add(new_playlist);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+
+            }
+            return Json(new { success = false });
+        }
+
 
 
         // GET: Playlists
