@@ -24,7 +24,6 @@ function LoadPlaylists(res) {
 
 }
 
-
 function fetchPlaylists() {
     $.ajax({
         type: 'GET',

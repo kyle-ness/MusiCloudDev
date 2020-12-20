@@ -15,11 +15,11 @@
         </div>
         <!-- Create playlist button -->
         <div class="d-flex flex-row-reverse">
-            <form asp-controller="Playlists" asp-action="CreatePlaylistAjax" method="post" class="search-form create-playlist">
-                <input asp-for="Name" type="text" placeholder="Search for a playlist">
-                <button>Create Playlist</button>
-            </form>
-            <span asp-validation-for="Name" class="alert-danger"></span>
+            <div class="search-form create-playlist">
+                <input id="PlaylistName" type="text" placeholder="Search for a playlist">
+                <button id="CreatePlaylist">Create Playlist</button>
+            </div>
+            <span class="alert-danger"></span>
         </div>
         <!-- End Ceate playlist button -->
         <div class="clearfix"></div>
@@ -44,7 +44,33 @@
         </div>
     </div>
 </section>
+
 @section Scripts
 { 
     <script src="~/js/Playlist.js"></script>
+    
+    <script>
+        $("#CreatePlaylist").click(function () {
+            CreatePlaylist();
+        })
+
+        function CreatePlaylist() {
+            var playlist_data = {
+                'Name': $("#PlaylistName").val()
+            };
+            $("#PlaylistName").attr("placeholder", "Create more playlists").val("")
+            $.ajax({
+                url: '/Playlists/CreatePlaylistAjax',
+                data: playlist_data,
+                success: function (res) {
+                    CreatePlaylistResult(res);
+                }
+            });
+        }
+
+        function CreatePlaylistResult(res) {
+            fetchPlaylists();
+        }
+
+    </script>
 }

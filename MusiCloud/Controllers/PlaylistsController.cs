@@ -43,15 +43,17 @@ namespace MusiCloud.Controllers
 
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePlaylistAjax([Bind("Id,Name,UserId")] Playlist new_playlist)
+        [Authorize]
+        public async Task<IActionResult> CreatePlaylistAjax(String Name)
         {
 
             var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
 
-            if (ModelState.IsValid && userId != null)
+            if (userId != null)
             {
+
+                Playlist new_playlist = new Playlist();
+                new_playlist.Name = Name;
 
                 new_playlist.UserId = int.Parse(userId);
                 Random rnd = new Random();
