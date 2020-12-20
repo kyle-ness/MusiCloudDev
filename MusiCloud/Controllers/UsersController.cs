@@ -81,6 +81,7 @@ namespace MusiCloud.Controllers
                     NewUser.Email = UserToCreate.Email;
                     NewUser.Password = UserToCreate.Password;
                     NewUser.DisplayName = UserToCreate.DisplayName;
+                    NewUser.UserType = "User";
 
                     _context.User.Add(NewUser);
                     await _context.SaveChangesAsync();
@@ -106,6 +107,7 @@ namespace MusiCloud.Controllers
             {
                 new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.DisplayName),
+                new Claim(ClaimTypes.Role, user.UserType),
                 new Claim(ClaimTypes.PrimarySid, user.Id.ToString()),
             };
 

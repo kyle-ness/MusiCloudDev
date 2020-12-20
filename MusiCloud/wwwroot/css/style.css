@@ -726,6 +726,11 @@ Playlist page
 	margin-right: auto;
 }
 
+.create-playlist {
+	width: 30%;
+	margin-left: auto;
+}
+
 .search-song-filter {
 	width: 80%;
 }
