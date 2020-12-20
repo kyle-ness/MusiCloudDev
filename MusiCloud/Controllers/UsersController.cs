@@ -65,7 +65,7 @@ namespace MusiCloud.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> SignUp([Bind("Id,DisplayName,Email,Password,ConfirmPassword")] User UserToCreate)
+        public async Task<IActionResult> SignUp([Bind("Id,DisplayName,Email,Password,ConfirmPassword,UserType")] User UserToCreate)
         {
 
             // Check that we got all the parameters that we need

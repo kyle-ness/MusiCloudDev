@@ -26,6 +26,9 @@ namespace MusiCloud.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AlbumLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ArtistId")
                         .HasColumnType("int");
 
@@ -55,6 +58,9 @@ namespace MusiCloud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AristLink")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
@@ -188,7 +194,6 @@ namespace MusiCloud.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

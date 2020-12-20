@@ -10,8 +10,6 @@ namespace MusiCloud.Models
     public class SongToPlaylist
     {
 
-        // Attempting to create a composite key out of the comination of the song - playlist relationship
-
         // FK from playlist table
         [Key]
         [Column(Order = 1)]

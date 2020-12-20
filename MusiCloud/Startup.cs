@@ -51,7 +51,7 @@ namespace MusiCloud
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
-                options.LoginPath = "/Home/Unauthorized";
+                options.LoginPath = "/Home/UnauthorizedPage";
                 options.AccessDeniedPath = "/Home/Error404";
             });
 

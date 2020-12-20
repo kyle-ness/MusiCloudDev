@@ -20,6 +20,8 @@ namespace MusiCloud.Models
 
         public string ImageLink { get; set; }
 
+        public string AlbumLink { get; set; }
+
         // FK from artist table
         [ForeignKey("Artist")]
         public int ArtistId { get; set; }

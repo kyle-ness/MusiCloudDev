@@ -25,11 +25,9 @@ namespace MusiCloud.Models
 
         [Required]
         public double Long { get; set; }
-
+        
         public string Country { get; set; }
         public string City { get; set; }
-
-        [Required]
         public string AddressName { get; set; }
         public string Description { get; set; }
     }

@@ -10,8 +10,8 @@ using MusiCloud.Data;
 namespace MusiCloud.Migrations
 {
     [DbContext(typeof(MusiCloudContext))]
-    [Migration("20201220031527_InitAfterRemove")]
-    partial class InitAfterRemove
+    [Migration("20201220142323_ModelUpdates")]
+    partial class ModelUpdates
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace MusiCloud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AlbumLink")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ArtistId")
                         .HasColumnType("int");
@@ -57,6 +60,9 @@ namespace MusiCloud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AristLink")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
@@ -190,7 +196,6 @@ namespace MusiCloud.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

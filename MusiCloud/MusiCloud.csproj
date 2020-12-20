@@ -12,6 +12,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201220031527_InitAfterRemove.cs" />
+    <Compile Remove="Migrations\20201220031527_InitAfterRemove.Designer.cs" />
+    <Compile Remove="Migrations\20201220130903_init4.cs" />
+    <Compile Remove="Migrations\20201220130903_init4.Designer.cs" />
+    <Compile Remove="Migrations\20201220131345_init5.cs" />
+    <Compile Remove="Migrations\20201220131345_init5.Designer.cs" />
+    <Compile Remove="Migrations\20201220132810_attempt.cs" />
+    <Compile Remove="Migrations\20201220132810_attempt.Designer.cs" />
+    <Compile Remove="Migrations\20201220143858_ModelsUpdates-2.cs" />
+    <Compile Remove="Migrations\20201220143858_ModelsUpdates-2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
