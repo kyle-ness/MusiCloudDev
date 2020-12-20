@@ -13,7 +13,7 @@ function LoadPlaylists(res) {
             content +=
                 '<div class="mix col-lg-3 col-md-4 col-sm-6 movies">' +
                 '<div class="playlist-item" >' +
-                '<img src="~/img/playlist/3.jpg" alt="">' +
+                '<img src="/img/playlist/'+ x.imgUrl +'.jpg" alt="">' +
                 '<h5>' + x.name + '</h5>' +
                 '</div>' +
                 '</div >';

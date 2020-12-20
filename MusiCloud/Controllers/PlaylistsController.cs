@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Web;
 
 
 namespace MusiCloud.Controllers
@@ -15,6 +16,8 @@ namespace MusiCloud.Controllers
     public class PlaylistsController : Controller
     {
         private readonly MusiCloudContext _context;
+
+
 
         public PlaylistsController(MusiCloudContext context)
         {
@@ -28,11 +31,13 @@ namespace MusiCloud.Controllers
             var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
             if (userId != null)
             {
+
                 var query = from playlist in _context.Playlist
                             where playlist.UserId.ToString().Equals(userId)
                             select new
                             {
                                 name = playlist.Name,
+                                imgUrl = playlist.ImageId,
                             };
 
 
