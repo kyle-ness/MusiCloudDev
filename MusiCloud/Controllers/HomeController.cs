@@ -7,18 +7,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MusiCloud.Models;
 using Microsoft.AspNetCore.Authorization;
+using MusiCloud.Data;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Security.Claims;
+
+
 
 
 namespace MusiCloud.Controllers
 {
     public class HomeController : Controller
     {
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
+ 
 
         [AllowAnonymous]
         public IActionResult Index()
@@ -43,7 +51,7 @@ namespace MusiCloud.Controllers
         {
             return View();
         }
-
+       
 
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -54,6 +62,12 @@ namespace MusiCloud.Controllers
 
         [Authorize]
         public IActionResult UserHome()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult AdminHome()
         {
             return View();
         }
