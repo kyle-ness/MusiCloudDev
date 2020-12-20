@@ -32,11 +32,13 @@ namespace MusiCloud.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Error404()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult UnauthorizedPage()
         {
             return View();
