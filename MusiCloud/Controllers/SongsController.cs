@@ -37,6 +37,7 @@ namespace MusiCloud.Controllers
                         join a in _context.Album on s.AlbumId equals a.Id
                         select new
                         {
+                           songId = s.Id,
                            name = s.Name,
                            songLink = s.LinkToPlay,
                            album = s.Album.Name,

@@ -40,14 +40,35 @@ function fetchSongs() {
         url: '/Songs/GetSongsOfArtistAjax?id=' + artist_id,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: LoadSongs
+        success: fetchPlaylists
     });
 }
 
+function fetchPlaylists(songs) {
+    $.ajax({
+        type: 'GET',
+        url: '/Playlists/List',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (res) {
 
-function LoadSongs(res) {
+            dropdown = '<div class="dropdown"><ul>';
+
+            res.playlists.forEach(x => {
+                dropdown += '<li>' +
+                    '<a onclick="foo(' + x.playlistId + ', song_id)">' + x.name + '</a>' +
+                    '</li>';
+            });
+
+            dropdown += '</ul></div>';
+            LoadSongs(songs, dropdown)
+        }
+    });
+
+}
+function LoadSongs(res, dropdown) {
     content = ''
-
+   
     if (res.errorCode) {
         content = '<h3>No songs for this artist :/</h3>';
     }
@@ -60,10 +81,10 @@ function LoadSongs(res) {
                 '            <div class="row">' +
                 '                <div class="col-lg-4">' +
                 '                    <div class="song-info-box">' +
-                '                        <img src="img/songs/1.jpg" alt="">' +
+                '                        <img src="' + x.imgLink + '" alt="">' +
                 '                        <div class="song-info">' +
-                '                            <h4>Jennifer Brown</h4>' +
-                '                            <p>One Night in Ibiza</p>' +
+                '                            <h4>'+ x.name +'</h4>' +
+                '                            <p>' + x.album + '</p>' +
                 '                        </div>' +
                 '                    </div>' +
                 '                </div>' +
@@ -80,7 +101,8 @@ function LoadSongs(res) {
                 '                                        <button class="jp-play player_button" tabindex="0"></button>' +
                 '                                        <button class="jp-next player_button" tabindex="0"></button>' +
                 '                                        <button class="jp-stop player_button" tabindex="0"></button>' +
-                '                                    </div>' +
+                '                                        <button onclick="openDropDown()" class="jp-add player_button" tabindex="0">+</button>' + dropdown.replace('song_id', x.songId) +
+                '                                        </div>' +
                 '                                    <!-- Progress Bar -->' +
                 '                                    <div class="player_bars">' +
                 '                                        <div class="jp-progress">' +
@@ -102,7 +124,6 @@ function LoadSongs(res) {
                 '    </div>';
         });
 
-
         $('#LoadSongs').html(content);
 
         initSinglePlayer();
@@ -110,7 +131,9 @@ function LoadSongs(res) {
 
 }
 
-
+function openDropDown() {
+    $(".dropdown").toggleClass('active');
+}
 
 $(document).ready(function () {
     fetchConcerts();
