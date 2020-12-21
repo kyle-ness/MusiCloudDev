@@ -1,0 +1,41 @@
+﻿@{
+   ViewData["Title"] = "Tweets";
+   Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+}
+
+<table id="UserList" style="width: 100%;"></table>
+
+<style>
+    th {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        background-color: #1DA1F2;
+        color: white;
+    }
+
+    td {
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        font-style: italic;
+        font-weight: bold;
+    }
+</style>
+
+@section scripts {
+    <script>$.ajax({
+            url: "/Tweets/GetTweets",
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (res) {
+                if (res.length > 0) {
+                    $('#UserList').append('<tr><th>Account</th><th>Comment</th></tr>')
+                    $.each(res, function (i, User) {
+                        $('#UserList').append('<tr><td> MusiCloudTwitter </td>    <td>' + User.comment + '</td></tr>')
+                    });
+                }
+            }
+        })</script>
+}
