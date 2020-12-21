@@ -97,6 +97,46 @@ namespace MusiCloud.Controllers
             return View(playlist);
         }
 
+
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> GetPlaylistSongsAjax(String playlistId)
+        {
+
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (userId != null)
+            {
+
+                // Verify that the user owns the playlist 
+                var playlist = _context.Playlist.FirstOrDefault(p => p.Id.ToString() == playlistId && p.UserId.ToString() == userId);
+
+                // Get all songs id that are part of the playlist
+                var listOfSongs = (from n in _context.SongToPlaylist where n.PlaylistId.ToString() == playlistId select n.SongId);
+
+                // Get all songs and their album data that are part of the playlist
+                var query = from s in _context.Song
+                            where listOfSongs.Contains(s.Id)
+                            join a in _context.Album on s.AlbumId equals a.Id
+                            select new
+                            {
+                                songId = s.Id,
+                                name = s.Name,
+                                songLink = s.LinkToPlay,
+                                album = s.Album.Name,
+                                imgLink = s.Album.ImageLink,
+                                artistId = s.Album.ArtistId
+                            };
+
+                var songs = await query.ToListAsync();
+                return Json(new { Songs = songs });
+            }
+
+            else
+            {
+                return new JsonResult(new object());
+            }
+        }
+
         [HttpPost]
         [Authorize(Roles = "User")]
         [ValidateAntiForgeryToken]

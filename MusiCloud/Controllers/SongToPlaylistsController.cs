@@ -91,6 +91,30 @@ namespace MusiCloud.Controllers
         }
 
 
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> DeleteSongFromPlaylistAjax(String playlistId, String songId)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (userId != null)
+            {
+                var playlist = _context.Playlist.FirstOrDefault(p => p.Id.ToString() == playlistId && p.UserId.ToString() == userId);
+
+                if (playlist != null)
+                {
+
+                    var SongsFromPlaylist = await _context.SongToPlaylist.FirstOrDefaultAsync(m => m.PlaylistId.ToString() == playlistId && m.SongId.ToString() == songId);
+                    _context.SongToPlaylist.Remove(SongsFromPlaylist);
+                    await _context.SaveChangesAsync();
+                    return Json(new { success = true });
+                }
+            }
+
+            return Json(new { success = false });
+        }
+
+
+
         [Authorize(Roles = "Admin")]
         // GET: SongToPlaylists
         public async Task<IActionResult> Index()
