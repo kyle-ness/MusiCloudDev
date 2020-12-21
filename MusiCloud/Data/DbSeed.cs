@@ -83,7 +83,7 @@ namespace MusiCloud.Data
 
             string[] concertNames = { "20 Years to Coldplay", "Mercury Rises" };
 
-            int[] concertArtistIds = { 3, 4 };
+            int[] concertArtistIds = { 1009, 1010 };
 
             double[] concertLats = { 32.06133337842293, 31.319971773900196 };
 
@@ -134,7 +134,7 @@ namespace MusiCloud.Data
 
             string[] albumAlbumLinks = { "bla", "bla" };
 
-            int[] albumArtistIds = { 3, 4 };
+            int[] albumArtistIds = { 1009, 1010 };
 
             if (!_context.Album.Any())
             {
@@ -167,7 +167,7 @@ namespace MusiCloud.Data
 
             string[] songLinksToPlays = { "bla", "bla" };
 
-            int[] songAlbumIds = {3, 4 };
+            int[] songAlbumIds = { 1009, 1010 };
 
             if (!_context.Song.Any())
             {
