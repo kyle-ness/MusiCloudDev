@@ -2,8 +2,16 @@
 
 @{
     ViewData["Title"] = "UserSettings";
-    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
 
+    if (ViewData["Type"] == "Admin")
+    {
+        Layout = "~/Views/Shared/_LoggedInAdminLayout.cshtml";
+    }
+
+    else
+    {
+        Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+    }
 }
 
 <section class="contact-section">
