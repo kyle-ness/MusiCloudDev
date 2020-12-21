@@ -33,7 +33,6 @@ namespace MusiCloud.Data
                 {
                     User user = new User()
                     {
-                        Id = userIds[i],
                         DisplayName = userDisplayNames[i],
                         Email = userEmails[i],
                         Password = userPasswords[i],
