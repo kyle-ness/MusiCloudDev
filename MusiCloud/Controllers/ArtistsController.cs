@@ -21,6 +21,36 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
+
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> Artist(String id)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (userId == null)
+            {
+                return RedirectToAction("UnauthorizedPage", "Home");
+            }
+
+            if (id == null)
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+
+            // Get only the playlist that belong to the user, based on the user's Id from the claim
+            var artist = await _context.Artist
+                .FirstOrDefaultAsync(m => m.Id.ToString() == id);
+            if (artist == null)
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+
+            return View(artist);
+        }
+
+
+
+
         [Authorize(Roles = "Admin")]
         // GET: Artists
         public async Task<IActionResult> Index()
