@@ -11,12 +11,12 @@
 
 function LoadConcerts(res) {
 
-    if (!res.errorCode) {
+    if (res.errorCode) {
         content = '<h3>Upcoming concert</h3>';
     }
 
     else {
-        content = '<a href="/Concerts/' + $("#ArtistId").val() + '">' + '<h3>Upcoming concert</h3>' + '</a>';
+        content = '<a href="/Concerts/Show/' + $("#ArtistId").val() + '">' + '<h3>Upcoming concert</h3>' + '</a>';
         content += '<ul>'
         res.concerts.forEach(x => {
             content +=

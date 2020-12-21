@@ -35,9 +35,9 @@
                     <h3>MusiCloud info</h3>
                     <ul>
                         <li><strong>Genre:</strong><span>@Html.DisplayFor(model => model.Genre)</span></li>
-                        <li><strong>Listeners:</strong><span>3,000,000</span></li>
-                        <li><strong>Number of albums:</strong><span>10</span></li>
-                        <li><strong>Number of songs:</strong><span>57</span></li>
+                        <li><strong>Listeners:</strong><span>@ViewData["SumOfListens"]</span></li>
+                        <li><strong>Number of albums:</strong><span>@ViewData["CountedAlbums"]</span></li>
+                        <li><strong>Number of songs:</strong><span>@ViewData["CountedSongs"]</span></li>
                     </ul>
                 </div>
             </div>
