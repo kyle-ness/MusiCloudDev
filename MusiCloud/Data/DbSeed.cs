@@ -25,7 +25,7 @@ namespace MusiCloud.Data
 
             string[] userConfirmPasswords = { "Aa123456!!" };
 
-            string[] userTypes = { "User" };
+            string[] userTypes = { "Admin" };
 
             if (!_context.User.Any())
             {

@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+
+
 
 namespace MusiCloud.Controllers
 {
@@ -19,12 +23,13 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
-        // GET: Admins
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Admin.ToListAsync());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Admins/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,6 +48,7 @@ namespace MusiCloud.Controllers
             return View(admin);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Admins/Create
         public IActionResult Create()
         {
@@ -53,6 +59,7 @@ namespace MusiCloud.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Username,Password,ConfirmPassword,UserType")] Admin admin)
         {
@@ -65,6 +72,7 @@ namespace MusiCloud.Controllers
             return View(admin);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Admins/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,6 +93,7 @@ namespace MusiCloud.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password,ConfirmPassword,UserType")] Admin admin)
         {
@@ -117,6 +126,7 @@ namespace MusiCloud.Controllers
         }
 
         // GET: Admins/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +145,7 @@ namespace MusiCloud.Controllers
         }
 
         // POST: Admins/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

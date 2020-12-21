@@ -45,7 +45,17 @@ namespace MusiCloud.Controllers
 
                 HttpContext.Session.SetString("DisplayName", user.DisplayName.ToString());
                 CreateCookie(user);
-                return RedirectToAction("UserHome", "Home");
+
+                if (user.UserType == "Admin")
+                {
+                    return RedirectToAction("AdminHome", "Home");
+                }
+
+                else
+                {
+                    return RedirectToAction("UserHome", "Home");
+
+                }
             }
             else
             {

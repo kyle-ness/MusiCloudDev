@@ -66,7 +66,7 @@ namespace MusiCloud.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminHome()
         {
             return View();

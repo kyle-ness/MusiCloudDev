@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace MusiCloud.Controllers
 {
@@ -46,6 +48,7 @@ namespace MusiCloud.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Concerts
         public async Task<IActionResult> Index()
         {
@@ -53,6 +56,7 @@ namespace MusiCloud.Controllers
             return View(await musiCloudContext.ToListAsync());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Concerts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -72,6 +76,7 @@ namespace MusiCloud.Controllers
             return View(concert);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Concerts/Create
         public IActionResult Create()
         {
@@ -82,6 +87,7 @@ namespace MusiCloud.Controllers
         // POST: Concerts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,ArtistId,Date,Lat,Long,Country,City,AddressName,Description")] Concert concert)
@@ -96,6 +102,7 @@ namespace MusiCloud.Controllers
             return View(concert);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Concerts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -116,6 +123,7 @@ namespace MusiCloud.Controllers
         // POST: Concerts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ArtistId,Date,Lat,Long,Country,City,AddressName,Description")] Concert concert)
@@ -149,6 +157,7 @@ namespace MusiCloud.Controllers
             return View(concert);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Concerts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -169,6 +178,7 @@ namespace MusiCloud.Controllers
         }
 
         // POST: Concerts/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
