@@ -19,17 +19,60 @@
                         <h2>@Html.DisplayFor(model => model.Name) Upcomings</h2>
                     </div>
                     <p>Follow your artist in the world, and view upcoming tours.</p>
-                    <ul id="concertDetails">
-                    </ul>
+                    <ul id="concertDetails"></ul>
                 </div>
+
+
+                <!-- weather -->
+                <div class="contact-warp">
+                    <div class="weather__container">
+                        <div class="weather-side">
+                            <div class="search-form search-song-filter">
+                                <input id="CityName" type="text" placeholder="Weather Lookup">
+                                <button id="WeatherLookup">Check Weather</button>
+                            </div>
+                            <span class="alert-danger"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="lblError" style="color:red"></span>
+                    </div>
+                    <div class="the-forecast" style="display:none">
+                        <h3>Weather Forecast</h3>
+                        <table>
+                            <tr>
+                                <td>
+                                    <strong>Weather Symbol Icon :</strong>
+                                    <img id="imgWeatherIconUrl" alt="" src="" title="Weather Icon" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Temperature:</strong>
+                                    <label id="lblTemp"></label> °C
+                                    <br />
+                                    <strong>Description:</strong>
+                                    <label id="lblDescription"></label>
+                                    <br />
+                                    <strong>Humidity:</strong>
+                                    <label id="lblHumidity"></label>%
+                                    <br />
+                                    <br />
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </div>
 </section>
+
 <input type="hidden" id="ArtistId" value="@Html.DisplayFor(model => model.Id)"</input>
 
 @section Scripts
 {
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDw4M0s-wdhkjGK1L5BkWzyilxKp15QnGY&callback=initMap&libraries=&v=weekly" defer></script>
     <script src="~/js/Concerts.js"></script>
+    <script src="~/js/weather.js"></script>
 }
