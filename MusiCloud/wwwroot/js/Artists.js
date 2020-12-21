@@ -10,9 +10,13 @@
 }
 
 function LoadConcerts(res) {
-    content = '<h3>Upcoming concert</h3>';
 
     if (!res.errorCode) {
+        content = '<h3>Upcoming concert</h3>';
+    }
+
+    else {
+        content = '<a href="/Concerts/' + $("#ArtistId").val() + '">' + '<h3>Upcoming concert</h3>' + '</a>';
         content += '<ul>'
         res.concerts.forEach(x => {
             content +=
