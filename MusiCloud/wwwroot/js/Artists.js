@@ -21,7 +21,11 @@ function LoadConcerts(res) {
         res.concerts.forEach(x => {
             content +=
                 '<li><strong>' + x.name + ', ' + x.country + ', ' + x.city + ', ' + x.address + '</strong>' +
-                '<span>' + x.date + '</span></li>';
+                '<div class="clearfix"></div>';
+
+            var date = new Date(x.date);
+
+            content += '<span>' + date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear() + '</span></li>';
         });
         content += '</ul>';
     }

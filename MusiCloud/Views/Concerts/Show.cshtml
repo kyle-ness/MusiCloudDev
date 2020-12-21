@@ -1,6 +1,4 @@
-﻿@model MusiCloud.Models.Concert
-
-@{
+﻿@{
     ViewData["Title"] = "Welcome";
     Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
 }
@@ -44,7 +42,7 @@
         </div>
     </div>
 </section>
-<input type="hidden" id="ArtistId" value="@Html.DisplayFor(model => model.ArtistId)"</input>
+<input type="hidden" id="ArtistId" value="@ViewData["AristId"]"</input>
 
 @section Scripts
 {

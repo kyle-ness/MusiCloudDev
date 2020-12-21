@@ -46,7 +46,7 @@ namespace MusiCloud.Controllers
             
         }
 
-        public IActionResult Show(string Id)
+        public IActionResult Show(int? Id)
         {
 
             ViewData["AristId"] = Id;
