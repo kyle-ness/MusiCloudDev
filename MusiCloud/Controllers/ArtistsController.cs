@@ -21,6 +21,49 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
+
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> Artist(String id)
+        {
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (userId == null)
+            {
+                return RedirectToAction("UnauthorizedPage", "Home");
+            }
+
+            if (id == null)
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+
+            // Get artist profile
+            var artist = await _context.Artist
+                .FirstOrDefaultAsync(m => m.Id.ToString() == id);
+
+            // Number of albums
+            int albums_count = _context.Album.Where(m => m.ArtistId.ToString() == id).Count();
+
+            // Number of songs 
+            var listOfalbums = (from n in _context.Album where n.ArtistId.ToString() == id select n.Id);
+            var count_songs = (from m in _context.Song where listOfalbums.Contains(m.AlbumId) select m).Count();
+            var sum_listened = (from m in _context.Song where listOfalbums.Contains(m.AlbumId) select m.CounterPlayed).Sum();
+
+            ViewData["CountedAlbums"] = albums_count;
+            ViewData["CountedSongs"] = count_songs;
+            ViewData["SumOfListens"] = sum_listened;
+
+            if (artist == null)
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+            
+            return View(artist);
+        }
+
+
+
+
         [Authorize(Roles = "Admin")]
         // GET: Artists
         public async Task<IActionResult> Index()

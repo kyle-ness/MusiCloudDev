@@ -1,7 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Welcome";
-    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+﻿@model MusiCloud.Models.Artist
 
+@{
+    ViewData["Title"] = "Upcoming concerts";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
 }
 
 <section class="contact-section">
@@ -15,49 +16,63 @@
             <div class="col-lg-6 p-0">
                 <div class="contact-warp">
                     <div class="section-title mb-0">
-                        <h2>Get in touch</h2>
+                        <h2>@Html.DisplayFor(model => model.Name) Upcomings</h2>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore mag na aliqua. Quis ipsum suspendisse ultrices gravida. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doe iusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. </p>
-                    <ul>
-                        <li>Main Road , No 25/11</li>
-                        <li>+34 556788 3221</li>
-                        <li>contact@solmusic.com</li>
-                    </ul>
-                    <form class="contact-from">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" placeholder="Your name">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" placeholder="Your e-mail">
-                            </div>
-                            <div class="col-md-12">
-                                <input type="text" placeholder="Subject">
-                                <textarea placeholder="Message"></textarea>
-                                <button class="site-btn">send message</button>
-                            </div>
-                        </div>
-                    </form>
+                    <p>Follow your artist in the world, and view upcoming tours.</p>
+                    <ul id="concertDetails"></ul>
                 </div>
+
+
+                <!-- weather -->
+                <div class="contact-warp">
+                    <div class="weather__container">
+                        <div class="weather-side">
+                            <div class="search-form search-song-filter">
+                                <input id="CityName" type="text" placeholder="Weather Lookup">
+                                <button id="WeatherLookup">Check Weather</button>
+                            </div>
+                            <span class="alert-danger"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="lblError" style="color:red"></span>
+                    </div>
+                    <div class="the-forecast" style="display:none">
+                        <h3>Weather Forecast</h3>
+                        <table>
+                            <tr>
+                                <td>
+                                    <strong>Weather Symbol Icon :</strong>
+                                    <img id="imgWeatherIconUrl" alt="" src="" title="Weather Icon" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Temperature:</strong>
+                                    <label id="lblTemp"></label> °C
+                                    <br />
+                                    <strong>Description:</strong>
+                                    <label id="lblDescription"></label>
+                                    <br />
+                                    <strong>Humidity:</strong>
+                                    <label id="lblHumidity"></label>%
+                                    <br />
+                                    <br />
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </div>
 </section>
 
-<script>
-    function fetchConcerts() {
-        $.ajax({
-            type: 'GET',
-            url: '/Concerts/GetConcerts?id=1',
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: LoadConcerts
-        });
-    }
-</script>
+<input type="hidden" id="ArtistId" value="@Html.DisplayFor(model => model.Id)"</input>
 
 @section Scripts
 {
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDw4M0s-wdhkjGK1L5BkWzyilxKp15QnGY&callback=initMap&libraries=&v=weekly" defer></script>
     <script src="~/js/Concerts.js"></script>
+    <script src="~/js/weather.js"></script>
 }

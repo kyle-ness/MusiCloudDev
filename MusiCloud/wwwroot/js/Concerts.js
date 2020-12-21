@@ -1,4 +1,15 @@
-﻿function LoadConcerts(res) {
+﻿function fetchConcerts() {
+    artist_id = $("#ArtistId").val();
+    $.ajax({
+    type: 'GET',
+        url: '/Concerts/GetConcerts?id=' + artist_id,
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: LoadConcerts
+    });
+}
+
+function LoadConcerts(res) {
     if (res.errorCode) {
         const uluru = { lat: 40.70027290768944, lng: -74.0442543305885 };
 
@@ -25,13 +36,25 @@
             center: uluru,
         });
 
+        content = ''
+
         res.concerts.forEach(x => {
             var uluru = { lat: x.lat, lng: x.lng }; 
             new google.maps.Marker({
                 position: uluru,
                 map: map,
             });
+
+            var date = new Date(x.date);
+
+            content +=
+                '<li Location: ><strong>' + x.name + ', ' + x.country + ', ' + x.city + ', ' +
+                '<li Address: ><strong>' + x.address + '</strong></li>' +
+                '<li Date: ><strong>' + + date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear() + '</strong></li>' +
+                '<div class="clearfix"></div>';
         });
+
+        $('#concertDetails').html(content);
 
     }
 

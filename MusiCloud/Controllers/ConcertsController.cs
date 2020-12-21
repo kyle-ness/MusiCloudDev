@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
 using Microsoft.AspNetCore.Authorization;
-
+using System.Net;
+using WeatherForecast.Models;
+using Newtonsoft.Json;
 
 namespace MusiCloud.Controllers
 {
@@ -32,7 +34,12 @@ namespace MusiCloud.Controllers
                             select new
                             {
                                 lat = concert.Lat,
-                                lng = concert.Long
+                                lng = concert.Long,
+                                name = concert.Name,
+                                date = concert.Date,
+                                country = concert.Country,
+                                city = concert.City,
+                                address = concert.AddressName
                             };
 
 
@@ -41,12 +48,68 @@ namespace MusiCloud.Controllers
             
         }
 
-        public IActionResult Show(string Id)
+        public IActionResult Show(int? Id)
         {
 
-            ViewData["AristId"] = Id;
-            return View();
+            var artist_id = Id.ToString();
+            var artist = _context.Artist.FirstOrDefault(m => m.Id.ToString() == artist_id);
+            
+            if (artist != null)
+            {
+                return View(artist);
+            }
+
+            else
+            {
+                return RedirectToAction("Error404", "Home");
+            }
         }
+
+
+        public String WeatherDetail(string City)
+        {
+
+            //Assign API KEY
+            string appId = "d544b61dcbdf99ece48ec5f7dec17be3";
+
+            //API path with CITY parameter and other parameters.  
+            string url = string.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&cnt=1&APPID={1}", City, appId);
+
+            using (WebClient client = new WebClient())
+            {
+                string json;
+                var jsonstring = "";
+                try
+                {
+                    json = client.DownloadString(url);
+
+                    //Converting to OBJECT from JSON string.  
+                    RootObject weatherInfo = JsonConvert.DeserializeObject<RootObject>(json);
+
+                    //Special VIEWMODEL design to send only required fields not all fields which received from   
+                    //www.openweathermap.org api  
+                    ResultViewModel rslt = new ResultViewModel();
+
+
+                    rslt.Description = weatherInfo.weather[0].description;
+                    rslt.Humidity = Convert.ToString(weatherInfo.main.humidity);
+                    rslt.Temp = Convert.ToString(weatherInfo.main.temp);
+                    rslt.WeatherIcon = weatherInfo.weather[0].icon;
+
+                    //Converting OBJECT to JSON String   
+                    jsonstring = JsonConvert.SerializeObject(rslt);
+                }
+                catch (Exception)
+                {
+                    string json1 = @"{ }";
+                    jsonstring = JsonConvert.SerializeObject(json1);
+                    return jsonstring;
+
+                }
+                return jsonstring;
+            }
+        }
+
 
         [Authorize(Roles = "Admin")]
         // GET: Concerts

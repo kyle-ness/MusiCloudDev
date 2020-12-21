@@ -1,0 +1,129 @@
+﻿
+@model MusiCloud.Models.Artist
+
+@{
+    ViewData["Title"] = "Welcome";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+}
+
+<!-- Player section -->
+<section class="player-section set-bg" data-setbg="@Html.DisplayFor(model => model.ImageLink)">
+    <div class="player-box">
+        <div class="tarck-thumb-warp">
+            <div class="tarck-thumb">
+                <img src="@Html.DisplayFor(model => model.ImageLink)" alt="">
+            </div>
+        </div>
+        <div class="wave-player-warp">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="wave-player-info">
+                        <h2>@Html.DisplayFor(model => model.Name)</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Player section end -->
+<!-- Songs details section -->
+<section class="songs-details-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="song-details-box">
+                    <h3>MusiCloud info</h3>
+                    <ul>
+                        <li><strong>Genre:</strong><span>@Html.DisplayFor(model => model.Genre)</span></li>
+                        <li><strong>Listeners:</strong><span>@ViewData["SumOfListens"]</span></li>
+                        <li><strong>Number of albums:</strong><span>@ViewData["CountedAlbums"]</span></li>
+                        <li><strong>Number of songs:</strong><span>@ViewData["CountedSongs"]</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="song-details-box">
+                            <h3>About the Artist</h3>
+                            <div class="artist-details">
+                                <img src="@Html.DisplayFor(model => model.ImageLink)" alt="">
+                                <div class="ad-text">
+                                    <h5>@Html.DisplayFor(model => model.Name)</h5>
+                                    <span>Band</span>
+                                    <p>@Html.DisplayFor(model => model.AristLink)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="concertDetails" class="song-details-box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+<!-- Songs section  -->
+<section class="songs-section">
+    <div class="container">
+
+        <!-- song -->
+        <div class="song-item">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="song-info-box">
+                        <img src="img/songs/1.jpg" alt="">
+                        <div class="song-info">
+                            <h4>Jennifer Brown</h4>
+                            <p>One Night in Ibiza</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="single_player_container">
+                        <div class="single_player">
+                            <div class="jp-jplayer jplayer" data-ancestor=".jp_container_1" data-url="music-files/1.mp3"></div>
+                            <div class="jp-audio jp_container_1" role="application" aria-label="media player">
+                                <div class="jp-gui jp-interface">
+
+                                    <!-- Player Controls -->
+                                    <div class="player_controls_box">
+                                        <button class="jp-prev player_button" tabindex="0"></button>
+                                        <button class="jp-play player_button" tabindex="0"></button>
+                                        <button class="jp-next player_button" tabindex="0"></button>
+                                        <button class="jp-stop player_button" tabindex="0"></button>
+                                    </div>
+                                    <!-- Progress Bar -->
+                                    <div class="player_bars">
+                                        <div class="jp-progress">
+                                            <div class="jp-seek-bar">
+                                                <div>
+                                                    <div class="jp-play-bar"><div class="jp-current-time" role="timer" aria-label="time">0:00</div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jp-duration ml-auto" role="timer" aria-label="duration">00:00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<input type="hidden" id="ArtistId" value="@Html.DisplayFor(model => model.Id)">
+
+@section Scripts
+{
+    <!-- Audio Player and Initialization -->
+    <script src="~/js/jquery.jplayer.min.js"></script>
+    <script src="~/js/jplayerInit.js"></script>
+    <script src="~/js/Artists.js"></script>
+}

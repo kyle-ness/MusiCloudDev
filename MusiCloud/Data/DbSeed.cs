@@ -15,15 +15,15 @@ namespace MusiCloud.Data
         {
 
             // -------------------------- User Table-----------------------------------------------            
-            string[] userDisplayNames = { "Kyle1994", "Admin" };
+            string[] userDisplayNames = { "Kyle1994", "Admin", "maple" };
 
-            string[] userEmails = { "Kyle1994@gmail.com", "admin@musicloud.com" };
+            string[] userEmails = { "Kyle1994@gmail.com", "admin@musicloud.com", "maple@gmail.com" };
 
-            string[] userPasswords = { "Aa123456!!", "Aa123456!!" };
+            string[] userPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456" };
 
-            string[] userConfirmPasswords = { "Aa123456!!", "Aa123456!!" };
+            string[] userConfirmPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456" };
 
-            string[] userTypes = { "Admin", "Admin" };
+            string[] userTypes = { "Admin", "Admin", "User" };
 
             if (!_context.User.Any())
             {
