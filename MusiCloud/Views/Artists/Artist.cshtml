@@ -19,7 +19,6 @@
                 <div class="col-lg-8">
                     <div class="wave-player-info">
                         <h2>@Html.DisplayFor(model => model.Name)</h2>
-                        <p>Parachutes</p>
                     </div>
                 </div>
             </div>
@@ -50,9 +49,9 @@
                             <div class="artist-details">
                                 <img src="@Html.DisplayFor(model => model.ImageLink)" alt="">
                                 <div class="ad-text">
-                                    <h5>Coldplay</h5>
+                                    <h5>@Html.DisplayFor(model => model.Name)</h5>
                                     <span>Band</span>
-                                    <p>Started off as an indie band from college to become one of the most popular bands in the world</p>
+                                    <p>@Html.DisplayFor(model => model.AristLink)</p>
                                 </div>
                             </div>
                         </div>
