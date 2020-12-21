@@ -21,6 +21,33 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> GetSongsOfArtistAjax(int? id)
+        {
+
+            // Get the artist
+            var artistId= id.ToString();
+            
+            // Get the albums that belong to the artist
+            var listOfalbums = (from n in _context.Album where n.ArtistId.ToString() == artistId select n.Id);
+
+            // Get the all the songs that belong to the artist
+            var query = from s in _context.Song
+                        where listOfalbums.Contains(s.AlbumId)
+                        join a in _context.Album on s.AlbumId equals a.Id
+                        select new
+                        {
+                           name = s.Name,
+                           songLink = s.LinkToPlay,
+                           album = s.Album.Name,
+                           imgLink = s.Album.ImageLink
+                        };
+
+            var songs = await query.ToListAsync();
+            return Json(new { Songs = songs });
+
+        }
+
         [Authorize(Roles = "Admin")]
         // GET: Songs
         public async Task<IActionResult> Index()

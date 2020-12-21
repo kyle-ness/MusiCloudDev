@@ -1,9 +1,5 @@
 // jPlayer Initialization
 
-(function($) {
-
-	initSinglePlayer();
-	
 	function initSinglePlayer() {
 		var players = $('.jplayer');
 		players.each( function(e) {
@@ -110,6 +106,4 @@
 			}
 		}
 	});
-
-})(jQuery);
 
