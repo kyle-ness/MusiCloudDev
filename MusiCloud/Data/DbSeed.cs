@@ -15,6 +15,8 @@ namespace MusiCloud.Data
         {
 
             // -------------------------- User Table-----------------------------------------------
+            int[] userIds = { 1 };
+            
             string[] userDisplayNames = { "Kyle1994" };
 
             string[] userEmails = { "Kyle1994@gmail.com" };
@@ -23,6 +25,7 @@ namespace MusiCloud.Data
 
             string[] userConfirmPasswords = { "Aa123456!!" };
 
+            string[] userTypes = { "User" };
 
             if (!_context.User.Any())
             {
@@ -30,10 +33,12 @@ namespace MusiCloud.Data
                 {
                     User user = new User()
                     {
+                        Id = userIds[i],
                         DisplayName = userDisplayNames[i],
                         Email = userEmails[i],
                         Password = userPasswords[i],
                         ConfirmPassword = userConfirmPasswords[i],
+                        UserType = userTypes[i]
                     };
 
                     _context.Add(user);
@@ -44,11 +49,42 @@ namespace MusiCloud.Data
 
             // --------------------------------------------------------------------------------------
 
+
+            // --------------------------Artist Table-----------------------------------------------
+
+            string[] artistNames = { "Coldplay", "Queen" };
+
+            string[] artistGenres = { "Rock", "Rock" };
+
+            string[] artistImageLinks = { "bla", "bla" };
+
+            string[] artistArtistLinks = { "bla", "bla" };
+
+            if (!_context.Artist.Any())
+            {
+                for (int i = 0; i <= 1; i++)
+                {
+                    Artist artist = new Artist()
+                    {
+                        Name = artistNames[i],
+                        Genre = artistGenres[i],
+                        ImageLink = artistImageLinks[i],
+                        AristLink = artistArtistLinks[i],
+                    };
+
+                    _context.Add(artist);
+                    _context.SaveChanges();
+
+                }
+            }
+
+            // ------------------------------------------------------------------------------------
+
             // --------------------------Concert Table-----------------------------------------------
 
             string[] concertNames = { "20 Years to Coldplay", "Mercury Rises" };
 
-            int[] concertArtistIds = { 2, 3 };
+            int[] concertArtistIds = { 3, 4 };
 
             double[] concertLats = { 32.06133337842293, 31.319971773900196 };
 
@@ -88,37 +124,6 @@ namespace MusiCloud.Data
 
             // -------------------------------------------------------------------------------------
 
-          
-            // --------------------------Artist Table-----------------------------------------------
-
-            string[] artistNames = { "Coldplay", "Queen" };
-
-            string[] artistGenres = { "Rock", "Rock" };
-
-            string[] artistImageLinks = { "bla", "bla" };
-
-            string[] artistArtistLinks = { "bla", "bla" };
-
-            if (!_context.Artist.Any())
-            {
-                for (int i = 0; i <= 1; i++)
-                {
-                    Artist artist = new Artist()
-                    {
-                        Name = artistNames[i],
-                        Genre = artistGenres[i],
-                        ImageLink = artistImageLinks[i],
-                        AristLink = artistArtistLinks[i],
-                    };
-
-                    _context.Add(artist);
-                    _context.SaveChanges();
-
-                }
-            }
-
-            // ------------------------------------------------------------------------------------
-
 
             // --------------------------Album Table-----------------------------------------------
 
@@ -130,7 +135,7 @@ namespace MusiCloud.Data
 
             string[] albumAlbumLinks = { "bla", "bla" };
 
-            int[] albumArtistIds = { 2, 3 };
+            int[] albumArtistIds = { 3, 4 };
 
             if (!_context.Album.Any())
             {
@@ -163,7 +168,7 @@ namespace MusiCloud.Data
 
             string[] songLinksToPlays = { "bla", "bla" };
 
-            int[] songAlbumIds = { 1, 2 };
+            int[] songAlbumIds = {3, 4 };
 
             if (!_context.Song.Any())
             {
