@@ -32,7 +32,11 @@ namespace MusiCloud.Controllers
                             select new
                             {
                                 lat = concert.Lat,
-                                lng = concert.Long
+                                lng = concert.Long,
+                                name = concert.Name,
+                                date = concert.Date,
+                                country = concert.Country,
+                                city = concert.City
                             };
 
 

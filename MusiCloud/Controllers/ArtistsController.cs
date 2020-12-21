@@ -37,14 +37,15 @@ namespace MusiCloud.Controllers
                 return RedirectToAction("Error404", "Home");
             }
 
-            // Get only the playlist that belong to the user, based on the user's Id from the claim
+            // Get artist profile
             var artist = await _context.Artist
                 .FirstOrDefaultAsync(m => m.Id.ToString() == id);
+
             if (artist == null)
             {
                 return RedirectToAction("Error404", "Home");
             }
-
+            
             return View(artist);
         }
 

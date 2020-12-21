@@ -1,7 +1,8 @@
-﻿@{
+﻿@model MusiCloud.Models.Concert
+
+@{
     ViewData["Title"] = "Welcome";
     Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
-
 }
 
 <section class="contact-section">
@@ -43,18 +44,7 @@
         </div>
     </div>
 </section>
-
-<script>
-    function fetchConcerts() {
-        $.ajax({
-            type: 'GET',
-            url: '/Concerts/GetConcerts?id=1',
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: LoadConcerts
-        });
-    }
-</script>
+<input type="hidden" id="ArtistId" value="@Html.DisplayFor(model => model.ArtistId)"</input>
 
 @section Scripts
 {

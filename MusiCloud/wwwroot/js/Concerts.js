@@ -1,4 +1,15 @@
-﻿function LoadConcerts(res) {
+﻿function fetchConcerts() {
+    artist_id = $("#ArtistId").val();
+    $.ajax({
+    type: 'GET',
+        url: '/Concerts/GetConcerts?id=' + artist_id,
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: LoadConcerts
+    });
+}
+
+function LoadConcerts(res) {
     if (res.errorCode) {
         const uluru = { lat: 40.70027290768944, lng: -74.0442543305885 };
 

@@ -68,6 +68,7 @@
             </div>
         </div>
     </div>
+    
 </section>
 
 <!-- Songs section  -->
@@ -121,9 +122,19 @@
     </div>
 </section>
 
+<input type="hidden" id="ArtistId" value="@Html.DisplayFor(model => model.Id)">
+
 @section Scripts
 {
     <!-- Audio Player and Initialization -->
-    <script src="js/jquery.jplayer.min.js"></script>
-    <script src="js/jplayerInit.js"></script>
+    <script src="~/js/jquery.jplayer.min.js"></script>
+    <script src="~/js/jplayerInit.js"></script>
+    <script src="~/js/Artists.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            fetchConcerts();
+        })
+
+    </script>
 }
