@@ -130,6 +130,71 @@ Helper CSS
 Commom elements
  -----------------------*/
 
+/* dropdown */
+.dropdown {
+	position: absolute;
+	width: 100%;
+	margin-top: 10px;
+	padding: 10px 0;
+	background: #fff;
+	border-radius: 4px;
+	filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+	transform: translate3d(0, 32px, 0) rotateX(-14deg) rotateY(12deg);
+	opacity: 0;
+	pointer-events: none;
+	backface-visibility: hidden;
+	transition: 0.3s ease all;
+	max-height: 250px;
+	padding-bottom: 0;
+}
+
+	.dropdown.active {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+		pointer-events: unset;
+	}
+
+	.dropdown:after {
+		right: 21px;
+		border: solid transparent;
+		content: "";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-color: rgba(136, 183, 213, 0);
+		border-bottom-color: #fff;
+		border-width: 10px;
+		margin-left: -10px;
+		top: -16px;
+	}
+
+	.dropdown ul {
+		display: block;
+	}
+
+	.dropdown li {
+		display: block;
+	}
+
+	.dropdown a {
+		border-radius: 0 !important;
+		font-size: 18px;
+		font-weight: 400;
+		display: inline-block;
+		border-radius: 200px;
+		padding: 12px;
+		line-height: 18px;
+		transition: 1s ease background;
+		display: block;
+		width: 100%;
+	}
+
+		.dropdown a:hover {
+			background: #f8f8f8;
+		}
+
+
 /* buttons */
 
 .play-button {
@@ -1032,7 +1097,9 @@ Category page
 }
 
 .player_controls_box {
-	width: 145px;
+	width: 180px;
+	display: flex;
+	justify-content: space-between
 }
 
 .top_player_controls_box {
