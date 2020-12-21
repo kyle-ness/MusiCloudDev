@@ -31,10 +31,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\songs\Coldplay\ArtistImage\" />
-    <Folder Include="wwwroot\songs\Coldplay\MyloXyloto\AlbumImage\" />
-    <Folder Include="wwwroot\songs\Queen\ANightAtTheOpera\AlbumImage\" />
-    <Folder Include="wwwroot\songs\Queen\ArtistImage\" />
+    <Folder Include="wwwroot\images\albums\MyloXyloto\" />
+    <Folder Include="wwwroot\images\albums\Lemonade\" />
+    <Folder Include="wwwroot\images\albums\AmericanIdiot\" />
+    <Folder Include="wwwroot\images\albums\ANightAtTheOpera\" />
+    <Folder Include="wwwroot\images\albums\Recovery\" />
+    <Folder Include="wwwroot\images\artists\Coldplay\" />
+    <Folder Include="wwwroot\images\artists\Eminem\" />
+    <Folder Include="wwwroot\images\artists\Beyonce\" />
+    <Folder Include="wwwroot\images\artists\GreenDay\" />
+    <Folder Include="wwwroot\images\artists\Queen\" />
   </ItemGroup>
 
 </Project>
