@@ -61,9 +61,6 @@ namespace MusiCloud.Controllers
             return View(artist);
         }
 
-
-
-
         [Authorize(Roles = "Admin")]
         // GET: Artists
         public async Task<IActionResult> Index()
