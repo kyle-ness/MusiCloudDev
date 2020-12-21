@@ -22,7 +22,7 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> List()
         {
             // Get the user from his current claim and verify it against the database 
@@ -47,7 +47,7 @@ namespace MusiCloud.Controllers
 
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> CreatePlaylistAjax(String Name)
         {
 
@@ -71,7 +71,7 @@ namespace MusiCloud.Controllers
             return Json(new { success = false });
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Playlist(int? id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
@@ -98,7 +98,7 @@ namespace MusiCloud.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePlaylist(String playlist_id)
         {
