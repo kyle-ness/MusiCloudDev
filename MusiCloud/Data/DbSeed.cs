@@ -49,13 +49,18 @@ namespace MusiCloud.Data
 
             // --------------------------Artist Table-----------------------------------------------
 
-            string[] artistNames = { "Coldplay", "Queen" };
+            string[] artistNames = { "Coldplay", "Queen", "GreenDay", "Eminem", "Beyonce" }; ;
 
-            string[] artistGenres = { "Rock", "Rock" };
+            string[] artistGenres = { "Rock", "Rock", "Rock", "Hip-Hop", "Pop" };
 
-            string[] artistImageLinks = { "bla", "bla" };
+            string[] artistImageLinks = { "/images/artists/Coldplay/Coldplay.jpg",
+                                          "/images/artists/Queen/Queen.jpg",
+                                          "/images/artists/GreenDay/GreenDay.jpg",
+                                          "/images/artists/Eminem/Eminem.jpg",
+                                          "/images/artists/Beyonce/Beyonce.jpg" };
 
-            string[] artistArtistLinks = { "bla", "bla" };
+            string[] artistArtistLinks = { "We are Coldplay", "Freddie is the KING",
+                                           "We are Idiots", "I'm not afraid", "I love JZ" };
 
             if (!_context.Artist.Any())
             {
@@ -81,7 +86,7 @@ namespace MusiCloud.Data
 
             string[] concertNames = { "20 Years to Coldplay", "Mercury Rises" };
 
-            int[] concertArtistIds = { 3, 4 };
+            int[] concertArtistIds = { 5, 6 };
 
             double[] concertLats = { 32.06133337842293, 31.319971773900196 };
 
@@ -93,7 +98,7 @@ namespace MusiCloud.Data
 
             string[] concertAddressNames = { "Menora Mivtachim", "Mesada" };
 
-            string[] concertDescriptions = { "First time is Israel", "Night lights show" };
+            string[] concertDescriptions = { "First time in Israel", "Night lights show" };
 
 
             if (!_context.Concert.Any())
@@ -124,15 +129,25 @@ namespace MusiCloud.Data
 
             // --------------------------Album Table-----------------------------------------------
 
-            string[] albumNames = { "Mylo Xyloto", "A Night at the Opera" };
+            string[] albumNames = { "Mylo Xyloto", "A Night at the Opera", "AmericanIdiot",
+                                    "Recovery", "Lemonade" }; 
 
-            string[] albumGenres = { "Rock", "Rock" };
+            string[] albumGenres = { "Rock", "Rock", "Rock", "Hip-Hop", "Pop" };
 
-            string[] albumImageLinks = { "bla", "bla" };
+            string[] albumImageLinks = { "/images/albums/MyloXyloto/MyloXyloto.jpg",
+                                         "/images/albums/ANightAtTheOpera/Opera.jpg",
+                                         "/images/albums/AmericanIdiot/AmericanIdiot.jpg",
+                                         "/images/albums/Recovery/Recovery.jpg",
+                                         "/images/albums/Lemonade/Lemonade.jpg" };
 
-            string[] albumAlbumLinks = { "bla", "bla" };
+            string[] albumAlbumLinks = { "Coldplay rocks Euroupe",
+                                         "Sssshhhh... Connect to your soul.",
+                                         "Oh Yeah we are Idiots",
+                                         "I'm white and I like it",
+                                         "Halo everybody" };
 
-            int[] albumArtistIds = { 3, 4 };
+
+            int[] albumArtistIds = { 5, 6, 7, 8, 9 };
 
             if (!_context.Album.Any())
             {
@@ -159,13 +174,22 @@ namespace MusiCloud.Data
 
             // --------------------------Song Table-----------------------------------------------
 
-            string[] songNames = { "Paradise", "Bohemian Rhaphsody" };
+            string[] songNames = {  "Paradise", "BohemianRhapsody", "CharlieBrown",
+                                    "Clocks", "FixYou", "SpeedOfSound", "Talk", "Trouble", "Yellow" };
 
-            int[] songCountersPlay = { 1, 3 };
+            int[] songCountersPlay = { 1, 3, 0, 20, 15 };
 
-            string[] songLinksToPlays = { "bla", "bla" };
+            string[] songLinksToPlays = { "/songs/Coldplay/MyloXyloto/Coldplay-Paradise(OfficialVideo).mp3",
+                                          "/songs/Queen/ANightAtTheOpera/Queen-BohemianRhapsody(1975Video).mp3",
+                                          "/songs/Coldplay/MyloXyloto/Coldplay-CharlieBrown(OfficialVideo).mp3",
+                                          "/songs/Coldplay/MyloXyloto/Coldplay-Clocks(OfficialVideo).mp3",
+                                          "/songs/Coldplay/MyloXyloto/Coldplay-FixYou(OfficialVideo).mp3",
+                                          "/songs/Coldplay/MyloXyloto/Coldplay-SpeedOfSound(OfficialVideo).mp3",
+                                          "/songs/Coldplay/MyloXyloto/Coldplay-Talk(OfficialVideo).mp3",
+                                          "/songs/Coldplay/MyloXyloto/Coldplay-Trouble(Officialvideo).mp3",
+                                          "/songs/Coldplay/MyloXyloto/Coldplay-Yellow(OfficialVideo).mp3"};
 
-            int[] songAlbumIds = { 3, 4 };
+            int[] songAlbumIds = { 5, 6, 7, 8, 9 };
 
             if (!_context.Song.Any())
             {
