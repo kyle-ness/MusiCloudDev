@@ -31,7 +31,25 @@ namespace MusiCloud.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return View();
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (userId == null)
+            {
+                return View();
+            }
+
+            else
+            {
+                var userType = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
+                return userType switch
+                {
+                    "Admin" => RedirectToAction("AdminHome", "Home"),
+                    "User" => RedirectToAction("userHome", "Home"),
+                    _ => View(),
+                };
+            }
+            
         }
 
         [AllowAnonymous]
@@ -60,13 +78,13 @@ namespace MusiCloud.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult UserHome()
         {
             return View();
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminHome()
         {
             return View();

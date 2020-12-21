@@ -14,22 +14,20 @@ namespace MusiCloud.Data
         public static void Seed(MusiCloudContext _context)
         {
 
-            // -------------------------- User Table-----------------------------------------------
-            int[] userIds = { 1 };
-            
-            string[] userDisplayNames = { "Kyle1994" };
+            // -------------------------- User Table-----------------------------------------------            
+            string[] userDisplayNames = { "Kyle1994", "Admin" };
 
-            string[] userEmails = { "Kyle1994@gmail.com" };
+            string[] userEmails = { "Kyle1994@gmail.com", "admin@musicloud.com" };
 
-            string[] userPasswords = { "Aa123456!!" };
+            string[] userPasswords = { "Aa123456!!", "Aa123456!!" };
 
-            string[] userConfirmPasswords = { "Aa123456!!" };
+            string[] userConfirmPasswords = { "Aa123456!!", "Aa123456!!" };
 
-            string[] userTypes = { "User" };
+            string[] userTypes = { "Admin", "Admin" };
 
             if (!_context.User.Any())
             {
-                for (int i = 0; i <= 0; i++)
+                for (int i = 0; i < userEmails.Length; i++)
                 {
                     User user = new User()
                     {
@@ -61,7 +59,7 @@ namespace MusiCloud.Data
 
             if (!_context.Artist.Any())
             {
-                for (int i = 0; i <= 1; i++)
+                for (int i = 0; i < artistNames.Length; i++)
                 {
                     Artist artist = new Artist()
                     {
@@ -100,7 +98,7 @@ namespace MusiCloud.Data
 
             if (!_context.Concert.Any())
             {
-                for (int i = 0; i <= 1; i++)
+                for (int i = 0; i < concertNames.Length; i++)
                 {
                     Concert concert = new Concert()
                     {
@@ -138,7 +136,7 @@ namespace MusiCloud.Data
 
             if (!_context.Album.Any())
             {
-                for (int i = 0; i <= 1; i++)
+                for (int i = 0; i < albumNames.Length; i++)
                 {
                     Album album = new Album()
                     {
@@ -167,11 +165,11 @@ namespace MusiCloud.Data
 
             string[] songLinksToPlays = { "bla", "bla" };
 
-            int[] songAlbumIds = {3, 4 };
+            int[] songAlbumIds = { 3, 4 };
 
             if (!_context.Song.Any())
             {
-                for (int i = 0; i <= 1; i++)
+                for (int i = 0; i < songNames.Length; i++)
                 {
                     Song song = new Song()
                     {

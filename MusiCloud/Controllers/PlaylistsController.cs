@@ -22,7 +22,7 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> List()
         {
             // Get the user from his current claim and verify it against the database 
@@ -47,7 +47,7 @@ namespace MusiCloud.Controllers
 
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> CreatePlaylistAjax(String Name)
         {
 
@@ -71,7 +71,7 @@ namespace MusiCloud.Controllers
             return Json(new { success = false });
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Playlist(int? id)
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
@@ -98,7 +98,7 @@ namespace MusiCloud.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeletePlaylist(String playlist_id)
         {
@@ -122,6 +122,7 @@ namespace MusiCloud.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         // GET: Playlists
         public async Task<IActionResult> Index()
         {
@@ -129,6 +130,7 @@ namespace MusiCloud.Controllers
             return View(await musiCloudContext.ToListAsync());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Playlists/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -148,6 +150,7 @@ namespace MusiCloud.Controllers
             return View(playlist);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Playlists/Create
         public IActionResult Create()
         {
@@ -158,6 +161,7 @@ namespace MusiCloud.Controllers
         // POST: Playlists/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,UserId")] Playlist playlist)
@@ -172,6 +176,7 @@ namespace MusiCloud.Controllers
             return View(playlist);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Playlists/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -192,6 +197,7 @@ namespace MusiCloud.Controllers
         // POST: Playlists/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UserId")] Playlist playlist)
@@ -225,6 +231,7 @@ namespace MusiCloud.Controllers
             return View(playlist);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Playlists/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -245,6 +252,7 @@ namespace MusiCloud.Controllers
         }
 
         // POST: Playlists/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
