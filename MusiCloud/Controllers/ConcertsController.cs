@@ -49,8 +49,18 @@ namespace MusiCloud.Controllers
         public IActionResult Show(int? Id)
         {
 
-            ViewData["AristId"] = Id;
-            return View();
+            var artist_id = Id.ToString();
+            var artist = _context.Artist.FirstOrDefault(m => m.Id.ToString() == artist_id);
+            
+            if (artist != null)
+            {
+                return View(artist);
+            }
+
+            else
+            {
+                return RedirectToAction("Error404", "Home");
+            }
         }
 
         [Authorize(Roles = "Admin")]

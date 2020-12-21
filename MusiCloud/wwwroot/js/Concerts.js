@@ -36,13 +36,25 @@ function LoadConcerts(res) {
             center: uluru,
         });
 
+        content = ''
+
         res.concerts.forEach(x => {
             var uluru = { lat: x.lat, lng: x.lng }; 
             new google.maps.Marker({
                 position: uluru,
                 map: map,
             });
+
+            var date = new Date(x.date);
+
+            content +=
+                '<li Location: ><strong>' + x.name + ', ' + x.country + ', ' + x.city + ', ' +
+                '<li Address: ><strong>' + x.address + '</strong></li>' +
+                '<li Date: ><strong>' + + date.getMonth() + '/' + date.getDay() + '/' + date.getFullYear() + '</strong></li>' +
+                '<div class="clearfix"></div>';
         });
+
+        $('#concertDetails').html(content);
 
     }
 
