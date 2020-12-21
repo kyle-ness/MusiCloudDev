@@ -36,7 +36,8 @@ namespace MusiCloud.Controllers
                                 name = concert.Name,
                                 date = concert.Date,
                                 country = concert.Country,
-                                city = concert.City
+                                city = concert.City,
+                                address = concert.AddressName
                             };
 
 
