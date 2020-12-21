@@ -21,6 +21,76 @@ namespace MusiCloud.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> AddSongToPlaylistAjax(String playlistId, String songId)
+        {
+
+            int flag = 0;
+            int intSongId = 0;
+            int intPlaylistId = 0;
+
+            // Attempt to convert variables to integers
+            try
+            {
+                intSongId = int.Parse(songId);
+                intPlaylistId = int.Parse(playlistId);
+            }
+
+            catch
+            {
+                flag = 2;
+            }
+
+            var userId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            if (userId != null)
+            {
+
+                // Verify that the user own the playlist 
+                var playlist = _context.Playlist.FirstOrDefault(p => p.Id == intPlaylistId && p.UserId.ToString() == userId);
+
+                if (playlist != null)
+                {
+
+                    // Verify that the song does not exist in the playlist
+                    var isSongInPlaylist = _context.SongToPlaylist.FirstOrDefault(s => s.PlaylistId == intPlaylistId && s.SongId == intSongId);
+
+
+                    // Song not in playlist so we can add it 
+                    if (isSongInPlaylist == null)
+                    {
+
+                        var addSong = new SongToPlaylist();
+                        addSong.SongId = intSongId;
+                        addSong.PlaylistId = intPlaylistId;
+                        _context.Add(addSong);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    else
+                    {
+                        flag = 1;
+                    }
+                }
+            }
+            if (flag == 0)
+            {
+                return Json(new { success = true });
+            }
+
+            else if (flag == 1)
+            {
+                return Json(new { success = false });
+            }
+
+            else
+            {
+                return RedirectToAction("Error404", "Home");
+            }
+
+        }
+
+
         [Authorize(Roles = "Admin")]
         // GET: SongToPlaylists
         public async Task<IActionResult> Index()

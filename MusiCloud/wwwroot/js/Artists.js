@@ -56,7 +56,7 @@ function fetchPlaylists(songs) {
 
             res.playlists.forEach(x => {
                 dropdown += '<li>' +
-                    '<a onclick="foo(' + x.playlistId + ', song_id)">' + x.name + '</a>' +
+                    '<a onclick="addSongToPlaylist(' + x.playlistId + ', song_id)">' + x.name + '</a>' +
                     '</li>';
             });
 
@@ -101,7 +101,7 @@ function LoadSongs(res, dropdown) {
                 '                                        <button class="jp-play player_button" tabindex="0"></button>' +
                 '                                        <button class="jp-next player_button" tabindex="0"></button>' +
                 '                                        <button class="jp-stop player_button" tabindex="0"></button>' +
-                '                                        <button onclick="openDropDown()" class="jp-add player_button" tabindex="0">+</button>' + dropdown.replace('song_id', x.songId) +
+                '                                        <button onclick="openDropDown()" class="jp-add player_button" tabindex="0">+</button>' + dropdown.replaceAll('song_id', x.songId) +
                 '                                        </div>' +
                 '                                    <!-- Progress Bar -->' +
                 '                                    <div class="player_bars">' +
@@ -130,6 +130,25 @@ function LoadSongs(res, dropdown) {
     }
 
 }
+
+function addSongToPlaylist(playlist_id, song_id) {
+    $.ajax({
+        type: 'GET',
+        url: '/SongToPlaylists/AddSongToPlaylistAjax?playlistId=' + playlist_id + '&songId=' + song_id,
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (res) {
+            openDropDown();
+
+            if (res.success != true) {
+                alert('song already exists')
+            }
+
+        }
+    });
+}
+
+
 
 function openDropDown() {
     $(".dropdown").toggleClass('active');
