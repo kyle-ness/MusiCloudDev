@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Welcome Admin";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+
+}
+<!-- welcom -->
+<div class="category-links">
+    <a href="">Welcome @User.Identity.Name</a>
+</div>
+<!-- top section -->
+
+<div class="container-fluid">
+    <div class="section-title">
+        <h2>Management</h2>
+    </div>
+</div>
+<!-- buttons section -->
+<div class="container">
+    <form>
+        <a asp-controller="Artists" asp-action="Index" class="site-btn site-login">Edit Artists</a>
+        <a asp-controller="Albums" asp-action="Index" class="site-btn site-login">Edit Songs</a>
+        <a asp-controller="Songs" asp-action="Index" class="site-btn site-login">Edit Albums</a>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
