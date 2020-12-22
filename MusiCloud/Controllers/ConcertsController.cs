@@ -22,7 +22,8 @@ namespace MusiCloud.Controllers
         {
             _context = context;
         }
-        
+
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetConcerts(string Id)
         {
             // Get the user from his current claim and verify it against the database 
@@ -48,6 +49,7 @@ namespace MusiCloud.Controllers
             
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Show(int? Id)
         {
 
@@ -65,7 +67,7 @@ namespace MusiCloud.Controllers
             }
         }
 
-
+        [Authorize(Roles = "User")]
         public String WeatherDetail(string City)
         {
 
