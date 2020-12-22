@@ -52,11 +52,11 @@ function fetchPlaylists(songs) {
         dataType: 'json',
         success: function (res) {
 
-            dropdown = '<div class="dropdown"><ul>';
+            dropdown = '<div id="dropdowntoreplace" class="dropdown"><ul>';
 
             res.playlists.forEach(x => {
                 dropdown += '<li>' +
-                    '<a onclick="addSongToPlaylist(' + x.playlistId + ', song_id)">' + x.name + '</a>' +
+                    '<a onclick="addSongToPlaylist(' + x.playlistId + ', song_id' +', dropdowntoreplace2' + ')">' + x.name + '</a>' +
                     '</li>';
             });
 
@@ -74,6 +74,8 @@ function LoadSongs(res, dropdown) {
     }
 
     else {
+        var count_from_zero = 0;
+        var count_from_one = 1;
         res.songs.forEach(x => {
             content += '    <div class="container">' +
                 '        <!-- song -->' +
@@ -83,7 +85,7 @@ function LoadSongs(res, dropdown) {
                 '                    <div class="song-info-box">' +
                 '                        <img src="' + x.imgLink + '" alt="">' +
                 '                        <div class="song-info">' +
-                '                            <h4>'+ x.name +'</h4>' +
+                '                            <h4>' + x.name + '</h4>' +
                 '                            <p>' + x.album + '</p>' +
                 '                        </div>' +
                 '                    </div>' +
@@ -91,17 +93,17 @@ function LoadSongs(res, dropdown) {
                 '                <div class="col-lg-6">' +
                 '                    <div class="single_player_container">' +
                 '                        <div class="single_player">' +
-                '                            <div class="jp-jplayer jplayer" data-ancestor=".jp_container_1" data-url="' + x.songLink + '"></div>' +
-                '                            <div class="jp-audio jp_container_1" role="application" aria-label="media player">' +
+                '                            <div class="jp-jplayer jplayer" data-ancestor=".jp_container_' + count_from_one + '" data-url="' + x.songLink + '"></div>' +
+                '                            <div class="jp-audio jp_container_' + count_from_one + '" role="application" aria-label="media player">' +
                 '                                <div class="jp-gui jp-interface">' +
 
                 '                                    <!-- Player Controls -->' +
                 '                                    <div class="player_controls_box">' +
-                '                                        <button class="jp-prev player_button" tabindex="0"></button>' +
-                '                                        <button class="jp-play player_button" tabindex="0"></button>' +
-                '                                        <button class="jp-next player_button" tabindex="0"></button>' +
-                '                                        <button class="jp-stop player_button" tabindex="0"></button>' +
-                '                                        <button onclick="openDropDown()" class="jp-add player_button" tabindex="0">+</button>' + dropdown.replaceAll('song_id', x.songId) +
+                '                                        <button class="jp-prev player_button" tabindex="' + count_from_zero + '"></button>' +
+                '                                        <button class="jp-play player_button" tabindex="' + count_from_zero + '"></button>' +
+                '                                        <button class="jp-next player_button" tabindex="' + count_from_zero + '"></button>' +
+                '                                        <button class="jp-stop player_button" tabindex="' + count_from_zero + '"></button>' +
+                '                                        <button onclick="openDropDown(' + count_from_zero + ')" class="jp-add player_button" tabindex="' + count_from_zero + '">+</button>' + dropdown.replaceAll('dropdowntoreplace2', count_from_zero).replace('dropdowntoreplace', count_from_zero).replaceAll('song_id', x.songId) +
                 '                                        </div>' +
                 '                                    <!-- Progress Bar -->' +
                 '                                    <div class="player_bars">' +
@@ -122,6 +124,9 @@ function LoadSongs(res, dropdown) {
                 '            </div>' +
                 '        </div>' +
                 '    </div>';
+
+            count_from_zero ++;
+            count_from_one ++;
         });
 
         $('#LoadSongs').html(content);
@@ -131,27 +136,27 @@ function LoadSongs(res, dropdown) {
 
 }
 
-function addSongToPlaylist(playlist_id, song_id) {
+function addSongToPlaylist(playlist_id, song_id, dropdown_id) {
     $.ajax({
         type: 'GET',
         url: '/SongToPlaylists/AddSongToPlaylistAjax?playlistId=' + playlist_id + '&songId=' + song_id,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function (res) {
-            openDropDown();
+            openDropDown(dropdown_id);
 
             if (res.success != true) {
-                alert('song already exists')
+                openDropDown(dropdown_id);
+                alert('song already exists');
+                
             }
 
         }
     });
 }
 
-
-
-function openDropDown() {
-    $(".dropdown").toggleClass('active');
+function openDropDown(id_of_dropdown) {
+    $('.dropdown').eq(id_of_dropdown).toggleClass('active');
 }
 
 $(document).ready(function () {

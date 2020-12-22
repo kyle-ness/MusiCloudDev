@@ -15,15 +15,15 @@ namespace MusiCloud.Data
         {
 
             // -------------------------- User Table-----------------------------------------------            
-            string[] userDisplayNames = { "Kyle1994", "Admin", "maple" };
+            string[] userDisplayNames = { "Kyle", "Admin", "Yotam", "maple", "simba" };
 
-            string[] userEmails = { "Kyle1994@gmail.com", "admin@musicloud.com", "maple@gmail.com" };
+            string[] userEmails = { "Kyle@gmail.com", "admin@musicloud.com", "yotam@gmail.com", "maple@gmail.com", "simba@gmail.com" };
 
-            string[] userPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456" };
+            string[] userPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456!!", "Aa123456", "Aa123456", };
 
-            string[] userConfirmPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456" };
+            string[] userConfirmPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456!!", "Aa123456", "Aa123456" };
 
-            string[] userTypes = { "Admin", "Admin", "User" };
+            string[] userTypes = { "Admin", "Admin", "User", "User", "User" };
 
             if (!_context.User.Any())
             {
@@ -59,8 +59,12 @@ namespace MusiCloud.Data
                                           "/images/artists/Eminem/Eminem.jpg",
                                           "/images/artists/Beyonce/Beyonce.jpg" };
 
-            string[] artistArtistLinks = { "We are Coldplay", "Freddie is the KING",
-                                           "We are Idiots", "I'm not afraid", "I love JZ" };
+            string[] artistArtistLinks = {  "Coldplay are a British rock band formed in London in 1996. Vocalist, rhythm guitarist and pianist Chris Martin, lead guitarist Jonny Buckland, bassist Guy Berryman, and drummer Will Champion met at University College London and began playing music together from 1996 to 1998, first calling themselves Pectoralz and then Starfish before finally changing their name to Coldplay.",
+                                            "Queen are a British rock band formed in London in 1970. Their classic line-up was Freddie Mercury (lead vocals, piano), Brian May (guitar, vocals), Roger Taylor (drums, vocals) and John Deacon (bass). Their earliest works were influenced by progressive rock, hard rock and heavy metal, but the band gradually ventured into more conventional and radio-friendly works by incorporating further styles, such as arena rock and pop rock.",
+                                            "Green Day is an American rock band formed in the East Bay of California in 1987.",
+                                            "Marshall Bruce Mathers III (born October 17, 1972), known professionally as Eminem.",
+                                            "An an American singer, actress and record producer. Born and raised in Houston, Texas, Beyoncé performed in various singing and dancing competitions as a child. She rose to fame in the late 1990s as the lead singer of Destiny's Child, one of the best-selling girl groups of all time. Beyoncé is often cited as an influence by other artists." 
+                                          };
 
             if (!_context.Artist.Any())
             {
@@ -86,7 +90,7 @@ namespace MusiCloud.Data
 
             string[] concertNames = { "20 Years to Coldplay", "Mercury Rises" };
 
-            int[] concertArtistIds = { 5, 6 };
+            int[] concertArtistIds = { 10, 11 };
 
             double[] concertLats = { 32.06133337842293, 31.319971773900196 };
 
@@ -129,8 +133,8 @@ namespace MusiCloud.Data
 
             // --------------------------Album Table-----------------------------------------------
 
-            string[] albumNames = { "Mylo Xyloto", "A Night at the Opera", "AmericanIdiot",
-                                    "Recovery", "Lemonade" }; 
+            string[] albumNames = { "Mylo Xyloto", "A Night at the Opera", "American Idiot",
+                                    "Recovery", "Lemonade" };
 
             string[] albumGenres = { "Rock", "Rock", "Rock", "Hip-Hop", "Pop" };
 
@@ -147,7 +151,7 @@ namespace MusiCloud.Data
                                          "Halo everybody" };
 
 
-            int[] albumArtistIds = { 5, 6, 7, 8, 9 };
+            int[] albumArtistIds = { 10, 11, 12, 13, 14 };
 
             if (!_context.Album.Any())
             {
@@ -156,7 +160,7 @@ namespace MusiCloud.Data
                     Album album = new Album()
                     {
                         Name = albumNames[i],
-                        Release_Date = DateTime.Now,   
+                        Release_Date = DateTime.Now,
                         Genre = albumGenres[i],
                         ImageLink = albumImageLinks[i],
                         AlbumLink = albumAlbumLinks[i],
@@ -175,9 +179,13 @@ namespace MusiCloud.Data
             // --------------------------Song Table-----------------------------------------------
 
             string[] songNames = {  "Paradise", "BohemianRhapsody", "CharlieBrown",
-                                    "Clocks", "FixYou", "SpeedOfSound", "Talk", "Trouble", "Yellow" };
+                                    "Clocks", "FixYou", "SpeedOfSound", "Talk", "Trouble", "Yellow",
+            "AnotherOneBitestheDust", "Don'tStopMeNow", "IWantToBreakFree", "KillerQueen", "RadioGaGa",
+            "SomebodyToLove", "TheShowMustGoOn", "UnderPressure", "WeAreTheChampions", "AmericanIdiot",
+            "BoulevardOfBrokenDreams", "CleaninOutMyCloset", "TheRealSlimShady", "Halo", "RunTheWorld", };
 
-            int[] songCountersPlay = { 1, 3, 0, 20, 15 };
+            int[] songCountersPlay = { 1, 3, 8, 20, 15, 4, 4, 6, 7, 8, 9, 1, 23, 4, 5, 6, 14, 13, 14, 11, 16, 18,
+            19, 20};
 
             string[] songLinksToPlays = { "/songs/Coldplay/MyloXyloto/Coldplay-Paradise(OfficialVideo).mp3",
                                           "/songs/Queen/ANightAtTheOpera/Queen-BohemianRhapsody(1975Video).mp3",
@@ -187,9 +195,25 @@ namespace MusiCloud.Data
                                           "/songs/Coldplay/MyloXyloto/Coldplay-SpeedOfSound(OfficialVideo).mp3",
                                           "/songs/Coldplay/MyloXyloto/Coldplay-Talk(OfficialVideo).mp3",
                                           "/songs/Coldplay/MyloXyloto/Coldplay-Trouble(Officialvideo).mp3",
-                                          "/songs/Coldplay/MyloXyloto/Coldplay-Yellow(OfficialVideo).mp3"};
+                                          "/songs/Coldplay/MyloXyloto/Coldplay-Yellow(OfficialVideo).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-AnotherOneBitestheDust(OfficialVideo).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-Don'tStopMeNow(OfficialVideo).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-IWantToBreakFree(OfficialVideo).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-KillerQueen(TopOfThePops,1974).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-RadioGaGa(OfficialVideo).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-SomebodyToLove(OfficialVideo).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-TheShowMustGoOn(OfficialVideo).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-UnderPressure(OfficialVideo).mp3",
+                                "/songs/Queen/ANightAtTheOpera/Queen-WeAreTheChampions(OfficialVideo).mp3",
+                                "/songs/GreenDay/GreenDay-AmericanIdiot[OFFICIALVIDEO].mp3",
+                                "/songs/GreenDay/GreenDayBoulevardOfBrokenDreams-[OfficialVideo].mp3",
+                                "/songs/Eminem/Eminem-Cleanin&#39OutMyCloset(OfficialVideo).mp3",
+                                "/songs/Eminem/Eminem-TheRealSlimShady(OfficialVideo-CleanVersion).mp3",
+                                "/songs/Beyonce/Beyoncé-Halo.mp3",
+                                "/songs/Beyonce/Beyoncé-RunTheWorld(Girls)[Lyrics]HD.mp3",};
 
-            int[] songAlbumIds = { 5, 6, 7, 8, 9 };
+            int[] songAlbumIds = { 10, 11, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+                12, 12, 13, 13, 14, 14  };
 
             if (!_context.Song.Any())
             {
@@ -213,6 +237,6 @@ namespace MusiCloud.Data
         }
     }
 }
-           
+
 
 

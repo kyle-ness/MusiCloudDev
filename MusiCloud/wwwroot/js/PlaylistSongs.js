@@ -23,6 +23,8 @@ function LoadSongs(res) {
     }
 
     else {
+        var count_from_zero = 0;
+        var count_from_one = 1;
         res.songs.forEach(x => {
 
             content += '    <div class="container">' +
@@ -43,17 +45,18 @@ function LoadSongs(res) {
                 '                <div class="col-lg-6">' +
                 '                    <div class="single_player_container">' +
                 '                        <div class="single_player">' +
-                '                            <div class="jp-jplayer jplayer" data-ancestor=".jp_container_1" data-url="' + x.songLink + '"></div>' +
-                '                            <div class="jp-audio jp_container_1" role="application" aria-label="media player">' +
+                '                            <div class="jp-jplayer jplayer" data-ancestor=".jp_container_' + count_from_one + '" data-url="' + x.songLink + '"></div>' +
+                '                            <div class="jp-audio jp_container_' + count_from_one + '" role="application" aria-label="media player">' +
                 '                                <div class="jp-gui jp-interface">' +
 
                 '                                    <!-- Player Controls -->' +
                 '                                    <div class="player_controls_box">' +
-                '                                        <button class="jp-prev player_button" tabindex="0"></button>' +
-                '                                        <button class="jp-play player_button" tabindex="0"></button>' +
-                '                                        <button class="jp-next player_button" tabindex="0"></button>' +
-                '                                        <button class="jp-stop player_button" tabindex="0"></button>' +
-                '                                        <button onclick="deleteSong(' + playlistId + ',' + x.songId + ')" class="jp-add player_button" tabindex="0">-</button>' +                '                                        </div>' +
+                '                                        <button class="jp-prev player_button" tabindex="' + count_from_zero + '"></button>' +
+                '                                        <button class="jp-play player_button" tabindex="' + count_from_zero + '"></button>' +
+                '                                        <button class="jp-next player_button" tabindex="' + count_from_zero + '"></button>' +
+                '                                        <button class="jp-stop player_button" tabindex="' + count_from_zero + '"></button>' +
+                '                                        <button onclick="deleteSong(' + playlistId + ',' + x.songId + ')" class="jp-add player_button" tabindex="' + count_from_zero + '">-</button>' +
+                '                                        </div>' +
                 '                                    <!-- Progress Bar -->' +
                 '                                    <div class="player_bars">' +
                 '                                        <div class="jp-progress">' +
@@ -73,6 +76,9 @@ function LoadSongs(res) {
                 '            </div>' +
                 '        </div>' +
                 '    </div>';
+
+            count_from_zero++;
+            count_from_one++;
 
         });
 
