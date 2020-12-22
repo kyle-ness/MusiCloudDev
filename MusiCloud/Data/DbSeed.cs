@@ -63,7 +63,7 @@ namespace MusiCloud.Data
                                             "Queen are a British rock band formed in London in 1970. Their classic line-up was Freddie Mercury (lead vocals, piano), Brian May (guitar, vocals), Roger Taylor (drums, vocals) and John Deacon (bass). Their earliest works were influenced by progressive rock, hard rock and heavy metal, but the band gradually ventured into more conventional and radio-friendly works by incorporating further styles, such as arena rock and pop rock.",
                                             "Green Day is an American rock band formed in the East Bay of California in 1987.",
                                             "Marshall Bruce Mathers III (born October 17, 1972), known professionally as Eminem.",
-                                            "An an American singer, actress and record producer. Born and raised in Houston, Texas, Beyoncé performed in various singing and dancing competitions as a child. She rose to fame in the late 1990s as the lead singer of Destiny's Child, one of the best-selling girl groups of all time. Beyoncé is often cited as an influence by other artists." 
+                                            "An an American singer, actress and record producer. Born and raised in Houston, Texas, Beyoncé performed in various singing and dancing competitions as a child. She rose to fame in the late 1990s as the lead singer of Destiny's Child, one of the best-selling girl groups of all time. Beyoncé is often cited as an influence by other artists."
                                           };
 
             if (!_context.Artist.Any())
