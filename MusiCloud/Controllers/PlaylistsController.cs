@@ -55,17 +55,91 @@ namespace MusiCloud.Controllers
 
             if (userId != null)
             {
+                
+                // Identify the creation of suggested playlist
+                if (Name == "suggested")
+                {
 
-                Playlist new_playlist = new Playlist();
-                new_playlist.Name = Name;
+                    // Create the playlist if it does not exist
+                    var isExist = await _context.Playlist.FirstOrDefaultAsync(m => m.Name == "suggested" && m.User.Id.ToString() == userId);
 
-                new_playlist.UserId = int.Parse(userId);
-                Random rnd = new Random();
-                new_playlist.ImageId = rnd.Next(1, 16);
+                    // Collected recommended songs
 
-                _context.Add(new_playlist);
-                await _context.SaveChangesAsync();
-                return Json(new { success = true });
+                    // Get all playlists of the user 
+                    var list_of_playlists = (from n in _context.Playlist where n.UserId.ToString() == userId select n.Id);
+
+
+                    // Get all the songs that matches all the playlists that belong to this user
+                    var list_of_songs = (from a in _context.SongToPlaylist
+                                          where list_of_playlists.Contains(a.PlaylistId)
+                                          join s in _context.Song on a.SongId equals s.Id
+                                          select s.AlbumId);
+
+
+                    // Get the top 5 most listened to songs
+                    if (!list_of_playlists.Any() || !list_of_songs.Any())
+                    {
+                        list_of_songs = _context.Song.Include(a => a.Album).OrderByDescending(s => s.CounterPlayed).Select(s=> s.Album.Id).Take(5);
+                    }
+
+                    // Get the top genre out of all the songs that belong to the user by taking the album's genre
+                    var top_genre = (from album in _context.Album
+                                     where list_of_songs.Contains(album.Id)
+                                     group album by album.Genre into genre
+                                     orderby genre.Count() descending
+                                     select genre.Key).FirstOrDefault();
+
+
+                    // Getting the top songs
+                    var top_songs = _context.Song.Include(a => a.Album).Where(s => s.Album.Genre == top_genre).OrderByDescending(s => s.CounterPlayed).Take(5).ToList();
+
+                    // Create the suggested playlist 
+                    if (isExist != null)
+                    {
+                        // Get the existing suggested playlist id 
+                        var suggestedPlaylistToRemove = await _context.Playlist.FirstOrDefaultAsync(m => m.Name == "suggested" && m.User.Id.ToString() == userId);
+                        _context.Playlist.Remove(suggestedPlaylistToRemove);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    // Create a new suggested playlist 
+                    Playlist new_suggested_playlist = new Playlist();
+                    new_suggested_playlist.Name = Name;
+
+                    new_suggested_playlist.UserId = int.Parse(userId);
+                    Random suggested_rnd = new Random();
+                    new_suggested_playlist.ImageId = suggested_rnd.Next(1, 16);
+
+                    _context.Add(new_suggested_playlist);
+                    await _context.SaveChangesAsync();
+
+                    foreach (var s in top_songs)
+                    {
+                        var addSong = new SongToPlaylist();
+                        addSong.SongId = s.Id;
+                        addSong.PlaylistId = new_suggested_playlist.Id;
+                        _context.Add(addSong);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    return Json(new { success = true });
+
+                }
+
+                else
+                {
+                    Playlist new_playlist = new Playlist();
+                    new_playlist.Name = Name;
+
+                    new_playlist.UserId = int.Parse(userId);
+                    Random rnd = new Random();
+                    new_playlist.ImageId = rnd.Next(1, 16);
+
+                    _context.Add(new_playlist);
+                    await _context.SaveChangesAsync();
+                    return Json(new { success = true });
+                }
+
 
             }
             return Json(new { success = false });

@@ -36,6 +36,11 @@ function fetchPlaylists() {
     });
 }
 
+$("#CreateSuggestedPlaylist").click(function () {
+    CreateSuggestedPlaylist();
+})
+
+
 $("#CreatePlaylist").click(function () {
     CreatePlaylist();
 })
@@ -45,6 +50,22 @@ $('#PlaylistName').keypress(function (e) {
         $('#CreatePlaylist').click();
     }
 });
+
+function CreateSuggestedPlaylist() {
+    var playlist_data = {
+        'Name': $("#CreateSuggestedPlaylist").val()
+    };
+    $.ajax({
+        url: '/Playlists/CreatePlaylistAjax',
+        data: playlist_data,
+        success: function (res) {
+            CreatePlaylistResult(res);
+        }
+    });
+}
+
+
+
 
 function CreatePlaylist() {
     var playlist_data = {
