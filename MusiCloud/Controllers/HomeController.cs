@@ -101,7 +101,7 @@ namespace MusiCloud.Controllers
 
                 List<Song> results = new List<Song>();
 
-                var songs = await _context.Song.Where(c => c.Name.ToLower().Contains(keyWord.ToLower())).ToListAsync();
+                var songs = await _context.Song.Include(o => o.Album).ThenInclude(bo => bo.Artist).Where(c => c.Name.ToLower().Contains(keyWord.ToLower())).ToListAsync();
                 var albums = await _context.Song.Include(o => o.Album).Where(c => c.Album.Name.ToLower().Contains(keyWord.ToLower())).ToListAsync();
                 var artists = await _context.Song.Include(o => o.Album).ThenInclude(bo => bo.Artist).Where(c => c.Album.Artist.Name.ToLower().Contains(keyWord.ToLower())).ToListAsync();
 
