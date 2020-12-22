@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MusiCloud.Models.Song>
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+
+}
+
+<!-- Playlist section -->
+<section class="playlist-section spad">
+    <div class="container-fluid">
+        <div class="section-title">
+            <h2>Playlists</h2>
+        </div>
+        <div class="container">
+            <ul class="playlist-filter controls">
+                <li class="control" data-filter=".genres">Songs</li>
+                <li class="control" data-filter=".artists">Artists</li>
+                <li class="control" data-filter=".movies">Albums</li>
+                <li class="control" data-filter="all">All Playlist</li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row playlist-area">
+
+            @{
+
+                List<int> artists = new List<int>();
+                List<int> albums = new List<int>();
+
+                foreach (var item in Model)
+                {
+                    <div class="mix col-lg-3 col-md-4 col-sm-6 genres">
+                        <div class="playlist-item">
+                            <img src=@Html.DisplayFor(modelItem => item.Album.ImageLink) alt="">
+                            <a href="/Artists/Artist/@Html.DisplayFor(modelItem => item.Album.Artist.Id)">
+                                <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    bool isInArtistList = artists.IndexOf(item.Album.Artist.Id) != -1;
+
+                    if (!isInArtistList)
+                    {
+                        <div class="mix col-lg-3 col-md-4 col-sm-6 artists">
+                            <div class="playlist-item">
+                                <img src=@Html.DisplayFor(modelItem => item.Album.Artist.ImageLink) alt="">
+                                <a href="/Artists/Artist/@Html.DisplayFor(modelItem => item.Album.Artist.Id)">
+                                    <h5>@Html.DisplayFor(modelItem => item.Album.Artist.Name)</h5>
+                                </a>
+                            </div>
+                        </div>
+
+                        artists.Add(item.Album.Artist.Id);
+                    }
+
+                    bool isInAlbumList = albums.IndexOf(item.Album.Id) != -1;
+
+                    if (!isInAlbumList)
+                    {
+                        <div class="mix col-lg-3 col-md-4 col-sm-6 movies">
+                            <div class="playlist-item">
+                                <img src=@Html.DisplayFor(modelItem => item.Album.ImageLink) alt="">
+                                <a href="/Artists/Artist/@Html.DisplayFor(modelItem => item.Album.Artist.Id)">
+                                    <h5>@Html.DisplayFor(modelItem => item.Album.Name)</h5>
+                                </a>
+                            </div>
+                        </div>
+                        }
+
+                        albums.Add(item.Album.Artist.Id);
+
+                    }
+                }
+        </div>
+    </div>
+</section>
+<!-- Playlist section end -->

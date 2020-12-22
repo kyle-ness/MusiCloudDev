@@ -21,12 +21,13 @@ namespace MusiCloud.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
+        private MusiCloudContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MusiCloudContext context)
         {
             _logger = logger;
+            _context = context;
         }
- 
 
         [AllowAnonymous]
         public IActionResult Index()
@@ -89,5 +90,59 @@ namespace MusiCloud.Controllers
         {
             return View();
         }
+
+
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> Search(String keyWord)
+        {
+            
+            if (keyWord != null || keyWord != "")
+            {
+
+                List<Song> results = new List<Song>();
+
+                var songs = await _context.Song.Include(o => o.Album).ThenInclude(bo => bo.Artist).Where(c => c.Name.ToLower().Contains(keyWord.ToLower())).ToListAsync();
+                var albums = await _context.Song.Include(o => o.Album).Where(c => c.Album.Name.ToLower().Contains(keyWord.ToLower())).ToListAsync();
+                var artists = await _context.Song.Include(o => o.Album).ThenInclude(bo => bo.Artist).Where(c => c.Album.Artist.Name.ToLower().Contains(keyWord.ToLower())).ToListAsync();
+
+                foreach (var song in songs)
+                {
+                    bool containsItem = results.Any(item => item.Id == song.Id);
+
+                    if (!containsItem)
+                    {
+                        results.Add(song);
+                    }
+
+                }
+
+                foreach (var song in albums)
+                {
+                    bool containsItem = results.Any(item => item.Id == song.Id);
+
+                    if (!containsItem)
+                    {
+                        results.Add(song);
+                    }
+
+                }
+
+                foreach (var song in artists)
+                {
+                    bool containsItem = results.Any(item => item.Id == song.Id);
+
+                    if (!containsItem)
+                    {
+                        results.Add(song);
+                    }
+
+                }
+                return View(results);
+            }
+
+            
+            return View();
+        }
+
     }
 }
