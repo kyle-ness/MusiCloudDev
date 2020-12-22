@@ -50,7 +50,7 @@ namespace MusiCloud.Controllers
             return View("Index");
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<JsonResult> GetTweets()
         {
@@ -71,6 +71,7 @@ namespace MusiCloud.Controllers
             return Json(tweets);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();

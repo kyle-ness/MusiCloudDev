@@ -172,6 +172,7 @@ namespace MusiCloud.Controllers
             return View(songToPlaylist);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: SongToPlaylists/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
