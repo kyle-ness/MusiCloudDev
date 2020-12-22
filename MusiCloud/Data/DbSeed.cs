@@ -15,15 +15,15 @@ namespace MusiCloud.Data
         {
 
             // -------------------------- User Table-----------------------------------------------            
-            string[] userDisplayNames = { "Kyle", "Admin", "Yotam", "maple", "simba" };
+            string[] userDisplayNames = { "Kyle1994", "Admin", "Yotam"  };
 
-            string[] userEmails = { "Kyle@gmail.com", "admin@musicloud.com", "yotam@gmail.com", "maple@gmail.com", "simba@gmail.com" };
+            string[] userEmails = { "Kyle1994@gmail.com", "admin@musicloud.com", "yotam@gmail.com" };
 
-            string[] userPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456!!", "Aa123456", "Aa123456", };
+            string[] userPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456!!" };
 
-            string[] userConfirmPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456!!", "Aa123456", "Aa123456" };
+            string[] userConfirmPasswords = { "Aa123456!!", "Aa123456!!", "Aa123456!!" };
 
-            string[] userTypes = { "Admin", "Admin", "User", "User", "User" };
+            string[] userTypes = { "Admin", "Admin", "User" };
 
             if (!_context.User.Any())
             {
@@ -59,12 +59,8 @@ namespace MusiCloud.Data
                                           "/images/artists/Eminem/Eminem.jpg",
                                           "/images/artists/Beyonce/Beyonce.jpg" };
 
-            string[] artistArtistLinks = {  "Coldplay are a British rock band formed in London in 1996. Vocalist, rhythm guitarist and pianist Chris Martin, lead guitarist Jonny Buckland, bassist Guy Berryman, and drummer Will Champion met at University College London and began playing music together from 1996 to 1998, first calling themselves Pectoralz and then Starfish before finally changing their name to Coldplay.",
-                                            "Queen are a British rock band formed in London in 1970. Their classic line-up was Freddie Mercury (lead vocals, piano), Brian May (guitar, vocals), Roger Taylor (drums, vocals) and John Deacon (bass). Their earliest works were influenced by progressive rock, hard rock and heavy metal, but the band gradually ventured into more conventional and radio-friendly works by incorporating further styles, such as arena rock and pop rock.",
-                                            "Green Day is an American rock band formed in the East Bay of California in 1987.",
-                                            "Marshall Bruce Mathers III (born October 17, 1972), known professionally as Eminem.",
-                                            "An an American singer, actress and record producer. Born and raised in Houston, Texas, Beyoncé performed in various singing and dancing competitions as a child. She rose to fame in the late 1990s as the lead singer of Destiny's Child, one of the best-selling girl groups of all time. Beyoncé is often cited as an influence by other artists."
-                                          };
+            string[] artistArtistLinks = { "We are Coldplay", "Freddie is the KING",
+                                           "We are Idiots", "I'm not afraid", "I love JZ" };
 
             if (!_context.Artist.Any())
             {
@@ -90,7 +86,7 @@ namespace MusiCloud.Data
 
             string[] concertNames = { "20 Years to Coldplay", "Mercury Rises" };
 
-            int[] concertArtistIds = { 10, 11 };
+            int[] concertArtistIds = { 17, 18 };
 
             double[] concertLats = { 32.06133337842293, 31.319971773900196 };
 
@@ -134,7 +130,7 @@ namespace MusiCloud.Data
             // --------------------------Album Table-----------------------------------------------
 
             string[] albumNames = { "Mylo Xyloto", "A Night at the Opera", "American Idiot",
-                                    "Recovery", "Lemonade" };
+                                    "Recovery", "Lemonade" }; 
 
             string[] albumGenres = { "Rock", "Rock", "Rock", "Hip-Hop", "Pop" };
 
@@ -151,7 +147,7 @@ namespace MusiCloud.Data
                                          "Halo everybody" };
 
 
-            int[] albumArtistIds = { 10, 11, 12, 13, 14 };
+            int[] albumArtistIds = { 17, 18, 19, 20, 21 };
 
             if (!_context.Album.Any())
             {
@@ -160,7 +156,7 @@ namespace MusiCloud.Data
                     Album album = new Album()
                     {
                         Name = albumNames[i],
-                        Release_Date = DateTime.Now,
+                        Release_Date = DateTime.Now,   
                         Genre = albumGenres[i],
                         ImageLink = albumImageLinks[i],
                         AlbumLink = albumAlbumLinks[i],
@@ -212,8 +208,8 @@ namespace MusiCloud.Data
                                 "/songs/Beyonce/Beyoncé-Halo.mp3",
                                 "/songs/Beyonce/Beyoncé-RunTheWorld(Girls)[Lyrics]HD.mp3",};
 
-            int[] songAlbumIds = { 10, 11, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11,
-                12, 12, 13, 13, 14, 14  };
+            int[] songAlbumIds = { 15, 16, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 16, 16, 16,
+                17, 17, 18, 18, 19, 19  };
 
             if (!_context.Song.Any())
             {
@@ -237,6 +233,6 @@ namespace MusiCloud.Data
         }
     }
 }
-
+           
 
 
