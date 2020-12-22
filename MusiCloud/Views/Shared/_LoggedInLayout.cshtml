@@ -48,8 +48,8 @@
                 <a asp-controller="Users" asp-action="Logout" class="register">Logout</a>
             </div>
         </div>
-        <form class="search-form search-header">
-            <input type="text" placeholder="Explore the music world">
+        <form action="/Home/Search" method="GET" class="search-form search-header">
+            <input type="text" placeholder="Explore the music world" name="keyWord">
             <button>Search</button>
         </form>
 
