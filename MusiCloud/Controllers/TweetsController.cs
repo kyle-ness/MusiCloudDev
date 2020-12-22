@@ -40,7 +40,7 @@ namespace MusiCloud.Controllers
         [HttpPost]
         public ActionResult Tweet(string albumName)
         {
-            var message = "#MusiCloudWebApp Come check out our newest Albums - " + albumName + "!";
+            var message = "#MusiCloudWebApp A new album has just added to our library - " + albumName + "!";
 
             TwitterService service = new TwitterService(_consumerKey, _consumerSecret);
             service.AuthenticateWith(_accessToken, _accessTokenSecret);

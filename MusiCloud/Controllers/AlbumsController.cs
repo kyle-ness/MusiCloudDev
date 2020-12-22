@@ -8,17 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using MusiCloud.Data;
 using MusiCloud.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
+using System.Dynamic;
 
 
 namespace MusiCloud.Controllers
 {
     public class AlbumsController : Controller
+
     {
         private readonly MusiCloudContext _context;
+        private readonly TweetsController _tweetsController;
 
-        public AlbumsController(MusiCloudContext context)
+        public AlbumsController(MusiCloudContext context, IConfiguration config)
         {
             _context = context;
+            _tweetsController = new TweetsController(config);
         }
 
         [Authorize(Roles = "Admin")]
@@ -69,6 +74,8 @@ namespace MusiCloud.Controllers
             {
                 _context.Add(album);
                 await _context.SaveChangesAsync();
+                //tweet about new Album
+                _tweetsController.Tweet(album.Name);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ArtistId"] = new SelectList(_context.Artist, "Id", "Name", album.ArtistId);
