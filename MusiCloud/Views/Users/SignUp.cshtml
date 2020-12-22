@@ -24,6 +24,12 @@
         <input asp-for="Email" class="input100" type="email" name="Email" placeholder="Email">
         <span class="focus-input100" data-placeholder="&#xf200;"></span>
         <span asp-validation-for="Email" class="alert-danger"></span>
+        @{ 
+            if (ViewBag.error != null)
+            {
+                <span class="alert-danger">@ViewBag.error</span>
+            }
+        }
     </div>
 
     <div class="wrap-input100 validate-input" data-validate="Enter password">

@@ -102,7 +102,7 @@ namespace MusiCloud.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "User already exists!");
+                    ViewBag.error = "User already exists!";
                 }
 
             }

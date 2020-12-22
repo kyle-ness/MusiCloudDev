@@ -205,12 +205,12 @@ namespace MusiCloud.Data
                                 "/songs/Queen/ANightAtTheOpera/Queen-TheShowMustGoOn(OfficialVideo).mp3",
                                 "/songs/Queen/ANightAtTheOpera/Queen-UnderPressure(OfficialVideo).mp3",
                                 "/songs/Queen/ANightAtTheOpera/Queen-WeAreTheChampions(OfficialVideo).mp3",
-                                "/songs/GreenDay/GreenDay-AmericanIdiot[OFFICIALVIDEO].mp3",
-                                "/songs/GreenDay/GreenDayBoulevardOfBrokenDreams-[OfficialVideo].mp3",
-                                "/songs/Eminem/Eminem-Cleanin&#39OutMyCloset(OfficialVideo).mp3",
-                                "/songs/Eminem/Eminem-TheRealSlimShady(OfficialVideo-CleanVersion).mp3",
-                                "/songs/Beyonce/Beyoncé-Halo.mp3",
-                                "/songs/Beyonce/Beyoncé-RunTheWorld(Girls)[Lyrics]HD.mp3",};
+                                "/songs/GreenDay/AmericanIdiot/GreenDay-AmericanIdiot[OFFICIALVIDEO].mp3",
+                                "/songs/GreenDay/AmericanIdiot/GreenDayBoulevardOfBrokenDreams-[OfficialVideo].mp3",
+                                "/songs/Eminem/Recovery/Eminem-Cleanin&#39OutMyCloset(OfficialVideo).mp3",
+                                "/songs/Eminem/Recovery/Eminem-TheRealSlimShady(OfficialVideo-CleanVersion).mp3",
+                                "/songs/Beyonce/Lemonade/Beyoncé-Halo.mp3",
+                                "/songs/Beyonce/Lemonade/Beyoncé-RunTheWorld(Girls)[Lyrics]HD.mp3",};
 
             int[] songAlbumIds = { 10, 11, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11,
                 12, 12, 13, 13, 14, 14  };
